@@ -6,6 +6,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  // StatelessWidget: 속성이 변하지 않음.
   const MyApp({Key? key}) : super(key: key);
 
   @override
@@ -54,6 +55,7 @@ class _RandomWordsState extends State<RandomWords> {
 }
 
 class RandomWords extends StatefulWidget {
+  // StatefulWidget: 속성이 변함.
   const RandomWords({Key? key}) : super(key: key);
 
   @override
