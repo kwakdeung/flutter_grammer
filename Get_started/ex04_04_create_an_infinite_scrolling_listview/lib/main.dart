@@ -44,6 +44,7 @@ class _RandomWordsState extends State<RandomWords> {
           // 스트림 만들기 - 1초마다 데이터를 1개씩 만듬, 10개 까지만. (출처: https://software-creator.tistory.com/9)
         }
         return ListTile(
+          // ListTile: 무한 스크롤 리스트뷰
           title: Text(
             _suggestions[index].asPascalCase,
             style: _biggerFont,
