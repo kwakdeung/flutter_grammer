@@ -151,7 +151,7 @@ Nesting rows and columns 에서 Pavlova의 레이아웃 코드 중 일부를 구
 
 ## Aligning(정렬) 위젯  
 
-mainAxisAlignment및 crossAxisAlignment속성 을 사용하여 Row이나 Column이 자식을 정렬하는 방법을 제어합니다.  
+mainAxisAlignment및 crossAxisAlignment 속성을 사용하여 Row이나 Column이 자식을 정렬하는 방법을 제어합니다.  
  Row: 주 축은 **수평**, 교차 축 수직  
  Column: 주 축은 **수직**, 교차 축 수평
 
@@ -165,7 +165,8 @@ mainAxisAlignment및 crossAxisAlignment속성 을 사용하여 Row이나 Column�
 
 ```dart
 Row(
-  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
+  // Row - mainAxisAlignment
   children: [
     Image.asset('images/pic1.jpg'),
     Image.asset('images/pic2.jpg'),
@@ -181,6 +182,7 @@ Column은 Row와 같은 방식으로 작동합니다. 다음 예는 각각 높�
 ```dart
 Column(
   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  // Column - mainAxisAlignment
   children: [
     Image.asset('images/pic1.jpg'),
     Image.asset('images/pic2.jpg'),
@@ -190,3 +192,49 @@ Column(
 ```  
 ![](https://docs.flutter.dev/assets/images/docs/ui/layout/column-visual.png)  
 
+## Sizing(사이즈 조정) 위젯  
+
+레이아웃이 너무 커서 장치에 맞지 않으면 영향을 받는 가장자리를 따라 노란색 및 검은색 줄무늬 패턴이 나타납니다. 다음은 너무 넓은 Row 의 예:  
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/layout-too-large.png)  
+
+이미지 Row이 렌더링 상자에 비해 너무 넓은 이전 예제를 수정하려면 Expanded로 조정합니다.  
+
+Expanded: Row이나 Column에 맞게 위젯의 크기를 조정.  
+```dart
+Row(
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+    Expanded(  
+      child: Image.asset('images/pic1.jpg'),
+    ),
+    Expanded(
+      child: Image.asset('images/pic2.jpg'),
+    ),
+    Expanded(
+      child: Image.asset('images/pic3.jpg'),
+    ),
+  ],
+);
+```  
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/row-spaceevenly-visual.png)  
+
+아마도 위젯이 형제보다 두 배 많은 공간을 차지하기를 원할 것입니다.  
+이를 위해 위젯의 요소를 결정하는 정수인 Expanded 위젯 flex 속성을 사용합니다.  기본 flex 요소는 1입니다. 다음 코드는 중간 이미지의 flex 요소를 2로 설정합니다.  
+```dart
+Row(
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+    Expanded( // 생략(기본) - flex: 1
+      child: Image.asset('images/pic1.jpg'),
+    ),
+    Expanded(
+      flex: 2,
+      child: Image.asset('images/pic2.jpg'),
+    ),
+    Expanded(
+      child: Image.asset('images/pic3.jpg'),
+    ),
+  ],
+);
+```  
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/row-expanded-visual.png)
