@@ -30,7 +30,7 @@ dev_dependencies:
 flutter:
 
   
-  uses-material-design: true // 미리 정의된 머티리얼 아이콘 세트를 사용할 수 있습니다.
+  uses-material-design: true # 미리 정의된 머티리얼 아이콘 세트를 사용할 수 있습니다.
 
   
   # assets:
