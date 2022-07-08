@@ -259,3 +259,136 @@ Row(
 ```  
 ![](https://docs.flutter.dev/assets/images/docs/ui/layout/packed.png)  
 
+## rows와 columns의 중첩  
+
+레이아웃 프레임워크를 사용하면 필요한 만큼 깊이 Row과 Column 내부에 Row과 Column을 중첩할 수 있습니다. 다음 레이아웃의 개요 섹션에 대한 코드를 살펴보겠습니다.  
+
+  
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/pavlova-large-annotated.png)  
+개요 섹션: 2개의 Row  
+평가 Row: 별 5개와 리뷰 수  
+아이콘 Row: 아이콘, 텍스트의 3 Column  
+
+평가 행의 위젯 트리:  
+
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/widget-tree-pavlova-rating-row.png)  
+```dart
+var stars = Row(
+  mainAxisSize: MainAxisSize.min,
+  children: [
+    Icon(Icons.star, color: Colors.green[500]),
+    Icon(Icons.star, color: Colors.green[500]),
+    Icon(Icons.star, color: Colors.green[500]),
+    const Icon(Icons.star, color: Colors.black),
+    const Icon(Icons.star, color: Colors.black),
+  ],
+);
+
+final ratings = Container(
+  padding: const EdgeInsets.all(20),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      stars,
+      const Text(
+        '170 Reviews',
+        style: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w800,  // 폰트 굵기
+          fontFamily: 'Roboto',  // 폰트 종류
+          letterSpacing: 0.5, // 철자 간격
+          fontSize: 20,
+        ),
+      ),
+    ],
+  ),
+);
+```  
+>**팁**: 많이 중첩된 레이아웃 코드로 인해 발생할 수 있는 시각적 혼란을 최소화하려면 변수 및 함수에서 UI 부분을 구현하십시오.  
+
+<br/>
+
+등급 행의 위젯 트리:  
+
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/widget-tree-pavlova-icon-row.png)  
+```dart
+const descTextStyle = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.w800,
+  fontFamily: 'Roboto',
+  letterSpacing: 0.5,
+  fontSize: 18,
+  height: 2,
+);
+
+// DefaultTextStyle.merge() allows you to create a default text
+// style that is inherited by its child and all subsequent children.
+final iconList = DefaultTextStyle.merge(
+  style: descTextStyle,
+  child: Container(
+    padding: const EdgeInsets.all(20),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Column(
+          children: [
+            Icon(Icons.kitchen, color: Colors.green[500]),
+            const Text('PREP:'),
+            const Text('25 min'),
+          ],
+        ),
+        Column(
+          children: [
+            Icon(Icons.timer, color: Colors.green[500]),
+            const Text('COOK:'),
+            const Text('1 hr'),
+          ],
+        ),
+        Column(
+          children: [
+            Icon(Icons.restaurant, color: Colors.green[500]),
+            const Text('FEEDS:'),
+            const Text('4-6'),
+          ],
+        ),
+      ],
+    ),
+  ),
+);
+
+// leftColumn - 등급 및 아이콘 Row와 Pavlova를 설명하는 "제목 및 텍스트"가 포함
+final leftColumn = Container(  
+  padding: const EdgeInsets.fromLTRB(20, 30, 20, 20), 
+  // fromLTRB(Left, Top, Right, Bottom) 
+  child: Column(
+    children: [
+      titleText,
+      subTitle,
+      ratings,
+      iconList,
+    ],
+  ),
+);
+
+body: Center(
+  child: Container(
+    margin: const EdgeInsets.fromLTRB(0, 40, 0, 30),
+    height: 600,
+    child: Card(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox( // 왼쪽 Column은 너비를 제한하기 위해 SizedBox가 배치됩니다
+            width: 440,
+            child: leftColumn,
+          ),
+          mainImage,
+        ],
+      ),
+    ),
+  ),
+),
+```  
+
+> **팁:** Pavlova 예제는 태블릿과 같은 넓은 장치에서 가로로 가장 잘 실행됩니다. **iOS 시뮬레이터에서 이 예제를 실행하는 경우 하드웨어 > 장치** 메뉴 를 사용하여 다른 장치를 선택할 수 있습니다. 이 예에서는 iPad Pro를 권장합니다. **하드웨어 > 회전** 을 사용하여 방향을 가로 모드로 변경할 수 있습니다 . **Window > Scale** 을 사용하여 (논리적 픽셀 수를 변경하지 않고) 시뮬레이터 창의 크기를 변경할 수도 있습니다 .
+
