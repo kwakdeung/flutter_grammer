@@ -91,6 +91,8 @@ UI를 디자인할 때 표준 위젯 라이브러리 의 위젯만 사용 하거
 ### Non-Material apps  
 
 Material이 아닌 Center앱의 경우 앱의 build()메서드에 위젯을 추가할 수 있습니다.  
+  * AppBar, 제목 또는 배경색이 포함되지 않습니다.(이러한 기능을 원하면 직접 빌드해야 함.)
+
 >lib/main.dart (MyApp)
 ```dart
 class MyApp extends StatelessWidget {
