@@ -244,7 +244,7 @@ Row(
 <br/>
 
 ## Packing(포장) 위젯  
-기본적으로 Row이나 Column은 주 축을 따라 가능한 한 많은 공간을 차지하지만 자식을 **밀접하게 묶고 싶다면** **mainAxisSize: MainAxisSize.min.** 로 설정 하십시오  다음 예제에서는 이 속성을 사용하여 별 아이콘을 함께 묶습니다.  
+기본적으로 Row이나 Column은 주 축을 따라 가능한 한 많은 공간을 차지하지만 자식을 **밀접하게 묶고** 싶다면 **mainAxisSize: MainAxisSize.min.** 로 설정 하십시오  다음 예제에서는 이 속성을 사용하여 별 아이콘을 함께 묶습니다.  
 ```dart
 Row(
   mainAxisSize: MainAxisSize.min, // 밀접하게 묶기
