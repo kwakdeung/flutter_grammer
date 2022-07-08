@@ -192,6 +192,8 @@ Column(
 ```  
 ![](https://docs.flutter.dev/assets/images/docs/ui/layout/column-visual.png)  
 
+<br/>
+
 ## Sizing(사이즈 조정) 위젯  
 
 레이아웃이 너무 커서 장치에 맞지 않으면 영향을 받는 가장자리를 따라 노란색 및 검은색 줄무늬 패턴이 나타납니다. 다음은 너무 넓은 Row 의 예:  
@@ -237,4 +239,23 @@ Row(
   ],
 );
 ```  
-![](https://docs.flutter.dev/assets/images/docs/ui/layout/row-expanded-visual.png)
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/row-expanded-visual.png)  
+
+<br/>
+
+## Packing(포장) 위젯  
+기본적으로 Row이나 Column은 주 축을 따라 가능한 한 많은 공간을 차지하지만 자식을 **밀접하게 묶고 싶다면** **mainAxisSize: MainAxisSize.min.** 로 설정 하십시오  다음 예제에서는 이 속성을 사용하여 별 아이콘을 함께 묶습니다.  
+```dart
+Row(
+  mainAxisSize: MainAxisSize.min, // 밀접하게 묶기
+  children: [
+    Icon(Icons.star, color: Colors.green[500]),
+    Icon(Icons.star, color: Colors.green[500]),
+    Icon(Icons.star, color: Colors.green[500]),
+    const Icon(Icons.star, color: Colors.black),
+    const Icon(Icons.star, color: Colors.black),
+  ],
+)
+```  
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/packed.png)  
+
