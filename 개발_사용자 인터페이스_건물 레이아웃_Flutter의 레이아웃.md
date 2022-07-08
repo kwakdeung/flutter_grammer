@@ -14,6 +14,12 @@
 
 > **참고:** 이 자습서의 대부분의 스크린샷은 시각적 레이아웃을 볼 수 있도록 true로 설정된 상태로 debugPaintSizeEnabled 표시됩니다. 자세한 내용은 시각적으로 레이아웃 문제 디버깅, Flutter 관리자 사용 섹션을 참조하세요.  
 
+<br/>
+
+**UI의 Widget Tree 다이어그램**
+ 
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/sample-flutter-layout.png)
+
 **Container => Row => Column => Icon, Container => text**  
 
 <br/>
@@ -116,3 +122,27 @@ class MyApp extends StatelessWidget {
   }
 }
 ```  
+
+<br/>
+
+## 여러 위젯을 수직, 가로(Column) 및 수평, 세로(Row)로 배치  
+: 가장 일반적인 레이아웃 패턴  
+> ### 포인트는 무엇인가?  
+>  * Row와 Column 가장 일반적으로 사용되는 두 가지 레이아웃 패턴입니다.
+>  * Row와 Column 각각은 자식 위젯의 목록을 가져옵니다.
+>  * 자식 위젯은 그 자체가 Row, Column 또는 기타 복잡한 위젯일 수 있습니다.
+>  * Row 또는 Column은 자식을 수평, 세로 및 수직, 가로로 정렬 하는 방법을 지정할 수 있습니다.
+>  * 특정 하위 위젯을 늘리거나 제한할 수 있습니다.
+>  * 여러 개의 Row 또는 Column의 사용 가능한 공간을 하위 위젯이 사용하는 방법을 지정할 수 있습니다.  
+
+<br/>
+이 레이아웃은 Row 로 구성됩니다. Column 에는 두 개의 자식이 있습니다. 왼쪽에 Column이 있고 오른쪽에 이미지가 있습니다.
+
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/pavlova-diagram.png)  
+<br/>
+왼쪽 Column의 위젯 트리는 Row과 Column을 중첩합니다.  
+
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/pavlova-left-column-diagram.png)  
+
+Nesting rows and columns 에서 Pavlova의 레이아웃 코드 중 일부를 구현합니다.  
+> **참고:** Row 및 Column은 수평 및 수직 레이아웃을 위한 가장 일반적인 기본 위젯입니다. 이러한 하위 수준 위젯은 최대 사용자화를 허용합니다. Flutter는 또한 귀하의 요구에 충분할 수 있는 전문화된 더 높은 수준의 위젯을 제공합니다. 예를 들어, 선행 및 후행 아이콘에 대한 속성과 최대 3줄의 텍스트가 있는 사용하기 쉬운 위젯을 Row 대신에 선호할 수 있습니다 . Column 대신에 내용이 너무 길어 사용 가능한 공간에 맞지 않는 경우 자동으로 스크롤되는 열과 같은 ListView 레이아웃을 선호할 수 있습니다. 자세한 내용은 공통 레이아웃 위젯을 참조하십시오 .
