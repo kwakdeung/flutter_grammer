@@ -125,13 +125,13 @@ class MyApp extends StatelessWidget {
 
 <br/>
 
-## 여러 위젯을 Row(수평, 세로) 및 Column(수직, 가로)로 배치  
+## 여러 위젯을 Row(수평, 가로) 및 Column(수직, 세로)로 배치  
 : 가장 일반적인 레이아웃 패턴  
 > ### 포인트는 무엇인가?  
 >  * Row와 Column 가장 일반적으로 사용되는 두 가지 레이아웃 패턴입니다.
 >  * Row와 Column 각각은 자식 위젯의 목록을 가져옵니다.
 >  * 자식 위젯은 그 자체가 Row, Column 또는 기타 복잡한 위젯일 수 있습니다.
->  * Row 또는 Column은 자식을 수평, 세로 및 수직, 가로로 정렬 하는 방법을 지정할 수 있습니다.
+>  * Row 또는 Column은 자식을 수평, 가로 및 수직, 세로로 정렬 하는 방법을 지정할 수 있습니다.
 >  * 특정 하위 위젯을 늘리거나 제한할 수 있습니다.
 >  * 여러 개의 Row 또는 Column의 사용 가능한 공간을 하위 위젯이 사용하는 방법을 지정할 수 있습니다.  
 
@@ -145,4 +145,48 @@ class MyApp extends StatelessWidget {
 ![](https://docs.flutter.dev/assets/images/docs/ui/layout/pavlova-left-column-diagram.png)  
 
 Nesting rows and columns 에서 Pavlova의 레이아웃 코드 중 일부를 구현합니다.  
-> **참고:** Row 및 Column은 수평 및 수직 레이아웃을 위한 가장 일반적인 기본 위젯입니다. 이러한 하위 수준 위젯은 최대 사용자화를 허용합니다. Flutter는 또한 귀하의 요구에 충분할 수 있는 전문화된 더 높은 수준의 위젯을 제공합니다. 예를 들어, 선행 및 후행 아이콘에 대한 속성과 최대 3줄의 텍스트가 있는 사용하기 쉬운 위젯을 Row 대신에 선호할 수 있습니다 . Column 대신에 내용이 너무 길어 사용 가능한 공간에 맞지 않는 경우 자동으로 스크롤되는 열과 같은 ListView 레이아웃을 선호할 수 있습니다. 자세한 내용은 공통 레이아웃 위젯을 참조하십시오.
+> **참고:** Row 및 Column은 수평 및 수직 레이아웃을 위한 가장 일반적인 기본 위젯입니다. 이러한 하위 수준 위젯은 최대 사용자화를 허용합니다. Flutter는 또한 귀하의 요구에 충분할 수 있는 전문화된 더 높은 수준의 위젯을 제공합니다. 예를 들어, 선행 및 후행 아이콘에 대한 속성과 최대 3줄의 텍스트가 있는 사용하기 쉬운 위젯을 Row 대신에 선호할 수 있습니다 . Column 대신에 내용이 너무 길어 사용 가능한 공간에 맞지 않는 경우 자동으로 스크롤되는 열과 같은 ListView 레이아웃을 선호할 수 있습니다. 자세한 내용은 공통 레이아웃 위젯을 참조하십시오.  
+
+<br/>
+
+## Aligning(정렬) 위젯  
+
+mainAxisAlignment및 crossAxisAlignment속성 을 사용하여 Row이나 Column이 자식을 정렬하는 방법을 제어합니다.  
+ Row: 주 축은 **수평**, 교차 축 수직  
+ Column: 주 축은 **수직**, 교차 축 수평
+
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/row-diagram.png)
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/column-diagram.png)  
+
+>**참고:** 프로젝트에 이미지를 추가할 때 이미지에 액세스하려면 pubspec.yaml 파일을 업데이트해야 합니다. 이 예에서는 이미지를 표시하는 데 Image.asset 사용합니다. 자세한 내용은 이 예제의 pubspec.yaml 파일 또는 자산 및 이미지 추가를 참조하십시오 . Image.network를 사용하여 온라인 이미지를 참조하는 경우에는 이 작업을 수행할 필요가 없습니다.    
+
+<br/>
+다음 예에서 3개의 이미지 각각은 너비가 100픽셀입니다. 렌더 상자(이 경우 전체 화면)는 너비가 300픽셀 이상이므로 주축 정렬을 설정하면 여유 수평 공간이 각 이미지 사이, 이전, 이후에 균등하게 분할됩니다.  
+
+```dart
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    Image.asset('images/pic1.jpg'),
+    Image.asset('images/pic2.jpg'),
+    Image.asset('images/pic3.jpg'),
+  ],
+);
+```  
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/row-spaceevenly-visual.png)  
+
+<br/>
+Column은 Row와 같은 방식으로 작동합니다. 다음 예는 각각 높이가 100픽셀인 3개의 이미지 열을 보여줍니다. 렌더 박스(이 경우 전체 화면)의 높이는 300픽셀 이상이므로 주축 정렬을 설정하면 자유 수직 공간이 각 이미지 사이, 위, 아래에 균등하게 분할됩니다.  
+
+```dart
+Column(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    Image.asset('images/pic1.jpg'),
+    Image.asset('images/pic2.jpg'),
+    Image.asset('images/pic3.jpg'),
+  ],
+);
+```  
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/column-visual.png)  
+
