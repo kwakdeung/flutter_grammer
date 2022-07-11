@@ -551,7 +551,7 @@ ListTile _tile(String title, String subtitle, IconData icon) {
 * 자식 목록의 첫 번째 위젯은 기본 위젯입니다. 후속 자식은 해당 기본 위젯 위에 overlaid됩니다.
 * A Stack의 콘텐츠를 **스크롤 할 수 없습니다**.
 * 렌더 상자(render box)를 초과하는 자식을 자르도록 선택할 수 있습니다.  
-<br/> 
+
 
 ### 예(Stack)  
 
@@ -590,4 +590,68 @@ Widget _buildStack() {
     ],
   );
 }
-```
+```  
+<br/>
+
+## Card(카드)  
+* Material card 구현
+* 관련 정보 모음을 표시하는 데 사용
+* 단일 자식을 허용하지만, 해당 자식은 Row, Column, 또는 자식 목록을 보유하는 다른 위젯이 될 수 있습니다.
+* 둥근 모서리와 그림자로 표시됨.
+* A Card의 콘텐츠를 **스크롤을 할 수 없음**
+* Material library로부터  
+
+### 예(Card)  
+
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/card.png)  
+이 Card는 3개의 ListTiles(주소, 전화번호, 이메일)를 포함하고 SizedBox로 카드를 감싸서 크기를 조정합니다. A Divider는 첫 번째(주소)와 두 번째(전화번호, 이메일)를 ListTiles로 구분합니다.
+
+
+<br/>
+
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/card-flutter-gallery.png)  
+이미지와 텍스트를 포함하는 Card  
+
+```dart
+Widget _buildCard() {
+  return SizedBox(
+    height: 210,
+    child: Card(
+      child: Column(
+        children:[
+          ListTile(
+            title: const Text(
+              '1625 Main Street',
+              style: TextStyle(fontWeight: FontWeight.w500),
+            ),
+            subtitle: const Text('My City, CA 99984'),
+            leading: Icon(
+              Icons.restaurant_menu,
+              color: Colors.blue[500],
+            ),
+          ),
+          const Divider(),
+          ListTile(
+            title: const Text(
+              '(408) 555-1212',
+              style: Textstyle(fontWeight: FontWeight.w500),
+            ),
+            leading: Icon(
+              Icons.contact_phone,
+              color: Colors.blue[500],
+            ),
+          ),
+          ListTile(
+            title: const Text('costa@example.com'),
+            leading: Icon(
+              Icons.contact_mail,
+              color: Colors.blue[500],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+```  
+
