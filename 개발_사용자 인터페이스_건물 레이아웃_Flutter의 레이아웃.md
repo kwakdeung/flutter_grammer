@@ -543,4 +543,51 @@ ListTile _tile(String title, String subtitle, IconData icon) {
     ),
   );  
 }
+```  
+<br/>
+
+## Stack(스택)  
+* 다른 위젯과 겹치는(overlap) 위젯에 사용
+* 자식 목록의 첫 번째 위젯은 기본 위젯입니다. 후속 자식은 해당 기본 위젯 위에 overlaid됩니다.
+* A Stack의 콘텐츠를 **스크롤 할 수 없습니다**.
+* 렌더 상자(render box)를 초과하는 자식을 자르도록 선택할 수 있습니다.  
+<br/> 
+
+### 예(Stack)  
+
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/stack.png)  
+**CircleAvatar**  
+
+Stack을(를) CircleAvatar 위에 Container를 overlay하는 데 사용 합니다( Text반투명 검은색 배경에 표시됨) 
+Stack은 alignment 속성과 Alignment를 사용하여 텍스트를 오프셋(offset)합니다.  
+
+offset(오프셋) - 두번 째 주소를 만들기 위해 기준이 되는 주소에 **더해진 값**  
+예) C: 100번지 주소, 수식의 결과: 107번지 -> **offset: +7** 번지  
+(출처: https://genesis8.tistory.com/74)  
+
+```dart
+Widget _buildStack() {
+  return Stack(
+    alignment: const Alignment(0.6, 0.6),
+    children: [
+      const CircleAvatar(
+        backgroundImage: AssetImage('images/pic.jpg'),
+        radius: 100,
+      ),
+      Container(
+        decoration: const BoxDecoration(
+          color: Colors.black45,
+        ),
+        child: const Text(
+          'Mia B',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ],
+  );
+}
 ```
