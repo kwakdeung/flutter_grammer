@@ -390,5 +390,102 @@ body: Center(
 ),
 ```  
 
-> **팁:** Pavlova 예제는 태블릿과 같은 넓은 장치에서 가로로 가장 잘 실행됩니다. **iOS 시뮬레이터에서 이 예제를 실행하는 경우 하드웨어 > 장치** 메뉴 를 사용하여 다른 장치를 선택할 수 있습니다. 이 예에서는 iPad Pro를 권장합니다. **하드웨어 > 회전** 을 사용하여 방향을 가로 모드로 변경할 수 있습니다 . **Window > Scale** 을 사용하여 (논리적 픽셀 수를 변경하지 않고) 시뮬레이터 창의 크기를 변경할 수도 있습니다 .
+> **팁:** Pavlova 예제는 태블릿과 같은 넓은 장치에서 가로로 가장 잘 실행됩니다. **iOS 시뮬레이터에서 이 예제를 실행하는 경우 하드웨어 > 장치** 메뉴 를 사용하여 다른 장치를 선택할 수 있습니다. 이 예에서는 iPad Pro를 권장합니다. **하드웨어 > 회전** 을 사용하여 방향을 가로 모드로 변경할 수 있습니다 . **Window > Scale** 을 사용하여 (논리적 픽셀 수를 변경하지 않고) 시뮬레이터 창의 크기를 변경할 수도 있습니다.  
 
+<br/>
+
+## 일반적인 레이아웃 위젯  
+
+Flutter에는 풍부한 레이아웃 위젯 라이브러리가 있습니다. 의도는 가능한 한 빨리 시작하고 실행하는 것입니다.  
+
+### 표준 위젯  
+* Container: 위젯에 **padding(패딩), margins(여백), borders(테두리), 배경색 또는 기타 장식**을 추가합니다.
+* GridView: 위젯을 **스크롤 가능한 그리드**로 배치합니다.
+* ListView: 위젯을 **스크롤 가능한 목록**으로 배치합니다. 
+* Stack: 위젯을 **다른 위젯 위에 겹칩니다.**  
+
+### Material 위젯  
+* Card: 모서리가 둥글고 그림자가 있는 상자에 관련 정보를 구성합니다.
+* ListTile: 최대 3줄의 텍스트와 선택적인 선행 및 후행 아이콘을 행으로 구성합니다.  
+
+### Container  
+* padding, margins, borders 추가
+* 배경색 또는 이미지 변경
+* 단일 하위 위젯을 포함하지만 해당 하위는 Row, Column 또는 위젯 트리의 루트일 수 있습니다.  
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/margin-padding-border.png)  
+
+### 예(Container)
+```dart  
+
+//
+Widget _buildImageColumn() {
+  return Container( // 이 Container는 열의 배경색을 밝은 회색으로 변경하는 데 사용
+    decoration: const BoxDecoration(
+      color: Colors.black26,
+    ),
+    child: Column(
+      children: [
+        _buildImageRow(1),
+        _buildImageRow(3),
+      ],
+    ),
+  );
+}  
+
+Widget _buildDecoratedImage(int imageIndex) => Expanded(
+      child: Container( // 이 Container는 각 이미지에 둥근 테두리와 여백을 추가하는 데 사용됩니다.       
+        decoration: BoxDecoration(
+          border: Border.all(width: 10, color: Colors.black38),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+        ),
+        margin: const EdgeInsets.all(4),
+        child: Image.asset('images/pic$imageIndex.jpg'),
+      ),
+    );
+
+Widget _buildImageRow(int imageIndex) => Row(
+      children: [
+        _buildDecoratedImage(imageIndex),
+        _buildDecoratedImage(imageIndex + 1),
+      ],
+    );
+```  
+
+<br/>
+
+## GridView(그리드 뷰)  
+
+* 그리드에 위젯 배치
+* column 콘텐츠가 렌더 상자를 초과할 때 감지하고 자동으로 스크롤 제공 
+* 사용자 지정 그리드를 구축하거나 제공된 그리드 중 하나를 사용합니다.
+
+  * GridView.count열 수를 지정할 수 있습니다.
+  * GridView.extent타일의 최대 픽셀 너비를 지정할 수 있습니다.  
+
+>**참고:** 셀이 차지하는 Row과 Column이 중요한 2차원 목록을 표시할 때(예: "아보카도" 행의 "칼로리" 열 항목) Table 또는 DataTable를 사용합니다.  
+
+### 예(GridView)  
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/gridview-extent.png)  
+
+GridView.extent - **최대 150픽셀 너비**의 타일이 있는 그리드를 만드는 데 사용합니다.  
+
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/gridview-count-flutter-gallery.png)  
+
+세로 모드에서 너비가 2타일이고 가로 모드에서 너비가 3타일인 그리드를 만드는데 GridView.count를 사용합니다. 제목은 각각의 GridTile footer 속성을 설정하여 생성됩니다.
+```dart
+Widget _buildGrid() => GridView.extent( 
+  // => : 람다식, extent: GridView의 범위 설정(maxCrossAxisExtent, padding, mainAxisSpacing, crossAxisSpacing 등)
+  maxCrossAxisExtent: 150, 
+  // maxCrossAxisExtent - 1개의 그리드 아이템의 "최대넓이 값"으로 Row 혹은 Column의 갯수 지정
+  padding: const EdgeInsets.all(4),
+  mainAxisSpacing: 4,
+  crossAxisSpacing: 4,
+  children: _buildGridTileList(30));  
+
+// The images are saved with names pic0.jpg, pic1.jpg...pic29.jpg.
+// The List.generate() constructor allows an easy way to create
+// a list when objects have a predictable naming pattern.
+List<Container> _buildGridTileList(int count) => List.generate( 
+  // List.generate - 리스트를 생성
+  count, (i) => Container(child: Image.asset('images/pic$i.jpg)));
+```
