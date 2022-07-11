@@ -488,4 +488,59 @@ Widget _buildGrid() => GridView.extent(
 List<Container> _buildGridTileList(int count) => List.generate( 
   // List.generate - 리스트를 생성
   count, (i) => Container(child: Image.asset('images/pic$i.jpg)));
+```  
+
+<br/>
+
+## ListView  
+
+* 특화된 Column 상자 목록을 구성 
+* horizontally 또는 vertically으로 배치 가능
+* 콘텐츠가 맞지 않을 때 감지하고 스크롤 제공
+* Column보다는 덜 구성 가능, 하지만 사용하기 쉽고 스크롤을 지원  
+<br/>
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/listview.png)  
+
+ListTiles를 사용하여 비즈니스 목록을 표시하는 데 ListView를 사용합니다. A Divider는 극장과 레스토랑을 구분합니다.
+
+
+![](https://docs.flutter.dev/assets/images/docs/ui/layout/listview-flutter-gallery.png)  
+
+특정 색상 군에 대한 재료 디자인 팔레트 Colors에서 표시하는 데 ListView를 사용합니다.  
+
+```dart  
+Widget _buildList() {
+  return ListView(
+    children: [
+      _tile('CineArts at the Empire', '85 W Portal Ave', Icons.theaters),
+      _tile('The Castro Theater', '429 Castro St', Icons.theaters),
+      _tile('Alamo Drafthouse Cinema', '2550 Mission St', Icons.theaters),
+      _tile('Roxie Theater', '3117 16th St', Icons.theaters),
+      _tile('United Artists Stonestown Twin', '501 Buckingham Way', Icons.theaters),
+      _tile('AMC Metreon 16', '135 4th St #3000', Icons.theaters),
+      const Divider(),
+      _tile('K\'s Kitchen', '757 Monterey Blvd', Icons.restaurant),
+      _tile('K\'s Kitchen', '757 Monterey Blvd', Icons.restaurant),
+      _tile('Emmy\'s Restaurant', '1923 Ocean Ave', Icons.restaurant),
+      _tile(
+          'Chaiya Thai Restaurant', '272 Claremont Blvd', Icons.restaurant),
+      _tile('La Ciccia', '291 30th St', Icons.restaurant),
+    ],
+  ):
+}
+
+ListTile _tile(String title, String subtitle, IconData icon) {
+  return ListTile(
+    title: Text(title,
+      style: const TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 20,
+      )),
+    subtitle: Text(subtitle),
+    leading: Icon(
+      icon,
+      color: Colors.blue[500],
+    ),
+  );  
+}
 ```
