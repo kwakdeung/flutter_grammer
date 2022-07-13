@@ -181,9 +181,9 @@ void _toggleFavorite() {
 만약 너가 코드를 실행할 수 없다면, 보라 너의 IDE에서 에러를 찾아라. 
 여전히 찾을 수 없다면 Github 예제 코드와 비교하라.  
 
-[lib/main.dart](https://github.com/flutter/website/blob/main/examples/layout/lakes/interactive/lib/main.dart)
-[pubspec.yaml](https://github.com/flutter/website/blob/main/examples/layout/lakes/interactive/pubspec.yaml)
-[lakes.jpg](https://github.com/flutter/website/blob/main/examples/layout/lakes/interactive/images/lake.jpg)  
+* [lib/main.dart](https://github.com/flutter/website/blob/main/examples/layout/lakes/interactive/lib/main.dart)  
+* [pubspec.yaml](https://github.com/flutter/website/blob/main/examples/layout/lakes/interactive/pubspec.yaml)  
+* [lakes.jpg](https://github.com/flutter/website/blob/main/examples/layout/lakes/interactive/images/lake.jpg)  
 
 만약 너가 여전히 질문을 한다면, 개발 커뮤니티 채널에 물어봐라.  
 
