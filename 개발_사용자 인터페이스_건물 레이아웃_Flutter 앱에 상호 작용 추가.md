@@ -62,6 +62,8 @@ building layout tutorial(6단계) 앱 빌드 후
   
 장치를 연결하고 활성화했거나 iOS 시뮬레이터 또는 Android 에뮬레이터를 시작했다면 시작 가능함.  
 
+<br/>
+
 ## 1단계: Decide which object manages the widget’s state(위젯의 상태를 관리하는 객체 결정)  
 
 Widget 자체 FavoriteWidget가 자체 상태를 관리함.  
@@ -297,8 +299,95 @@ class MyApp extends StatelessWidget {
 }
 ``` 
 
+<br/>
 
+## The parent widget manages the Widget's state(부모 위젯은 위젯 상태를 관리)  
 
+종종 parent widget는 state 관리, 그것의 child widget은 업데이트 할 때 가장 sense 있다고 말한다.  
+IconButton은 stateless widget이다.  
+
+예를 들어, TapboxB는 callback을 통한 parent의 state를 내보낸다. 그 이유는 StatelessWidget은 subclass 하기 때문에 TapboxB는 어떠한 state에도 관리하지 않는다.  
+
+ParentWidgetState class:  
+* TapboxB를 위한 _active state를 관리
+* box가 탭을 할 때 부르는 메서드, _handleTapboxChanged() 구현  
+* state가 변경될 때, UI가 업데이트를 하기 위해 setState()를 호출  
+
+TapboxB class:
+* StatelessWidget을 상속한다. 그 이유는 모든 state는 parent에 의해 다뤄지기 때문이다.
+* 탭이 감지될 때, parent에게 알린다.
+
+```dart
+import 'package:flutter/material.dart';
+
+// ParentWidget manages the state for TapboxB.
+
+//------------------------ ParentWidget --------------------------------
+class ParentWidget extends StatefulWidget {
+    const ParentWidget({super.key});
+
+    @override
+    State<ParentWidget> createState() => _ParentWidgetState();
+}
+
+class _ParentWidgetState extends State<ParentWidget> {
+    bool _active = false;
+
+    void _handleTapboxChanged(bool newValue) {
+        setState(() {
+            _active = newValue;
+        });
+    }
+
+    @override
+    Widget build(BuildContext context) {
+        return SizedBox(
+            child: TapboxB(
+                active: _active,
+                onChanged: _handleTapboxChanged,
+            ),
+        );
+    }
+}
+
+//------------------------- TapboxB ----------------------------------
+
+class TapboxB extends StatelessWidget {
+    const TapboxB({
+        super.key,
+        this.active = false,
+        required this.onChanged,
+    });
+
+    final bool active;
+    final ValueChanged<bool> onChanged;
+
+    void _handleTap() {
+        onChanged(!active);
+    }
+
+    @override
+    Widget build(BuildContext context) {
+        return GestureDetector(
+            onTap: _handleTap,
+            child: Container(
+                width: 200.0,
+                height: 200.0,
+                decoration: BoxDecoration(
+                    color: active ? Colors.lightGreen[700] : Colors.grey[600],
+                ),
+                child: Center(
+                    child: Text(
+                        active ? 'Active' : 'Inactive',
+                        style: const TextStyle(fontSize: 32.0, color: Colors.white),
+                    ),
+                ),
+            ),
+        );
+    }
+}
+
+``` 
 
 
 
