@@ -386,9 +386,130 @@ class TapboxB extends StatelessWidget {
         );
     }
 }
-
 ``` 
 
+<br/>
+
+## A mix-and-match approach  
+
+widget들 중 일부는, a mix-and-match approach가 가장 sense있다. 이 시나리오는, stateful widget은 일부 state를 관리하고 parent widget은 state의 다른 측면을 관리한다.  
+
+예를 들어, TapboxC는 아래로 탭하면 box 주위 border(테두리)에 진한 초록이 나타난다.
+탭하면 테두리가 사라지고 상자의 색상이 변경된다. TapboxC는 parent를 통해 _active state를 내보내지만 _highlight의 내부 state를 관리한다.  
+
+_ParentWidgetState object:
+* _active state 관리
+* box가 탭이 될 때 부르는 메서드 _handleTapboxChanged() 구현
+* 탭이 될 때 및 _active state 변화할 때 UI의 업데이트를 위해 setState()를 호출한다.  
+
+The _TapboxCState object:
+* _highlight state 관리
+* GestureDetector는 모든 탭의 event들을 듣는다. 아래로 tap할 때, (진한 초록이 구현되는) highlight가 추가된다. 유저가 탭을 풀 때, highlight는 제거된다.
+* 아래로 탭할 때, 위로 탭할 때 또는 탭이 취소될 때 그리고 _highlight state 변화할 때 UI의 업데이트를 위해 setState()를 호출한다.
+* 탭 event에서 해당 state 변화를 parent widget에 전달해 widget 속성을 사용하여 통과한다.
+```dart
+import 'package:flutter/material.dart';
+
+//---------------------------- ParentWidget ----------------------------
+class ParentWidget extends StatefulWidget {
+    const ParentWidget({super.key});
+
+    @override
+    State<ParentWidget> createState() => _ParentWidgetState();
+}
+
+class _ParentWidgetState extends State<ParentWidget> {
+    bool _active = false;
+
+    void _handleTapboxChanged(bool newValue) {
+        setState(() {
+            _active = newValue;
+        });
+    }
+
+    @override
+    Widget build(BuildContext context) {
+        return SizedBox(
+            child: TapboxC(
+                active: _active,
+                onChanged: _handleTapboxChanged,
+            ),
+        );
+    }
+}
+
+//----------------------------- TapboxC ------------------------------
+
+class TapboxC extends StatefulWidget {
+    const TapboxC({
+        super.key,
+        this.active = false,
+        required this.onChanged,
+    });
+
+    final bool active;
+    final ValueChanged<bool> onChanged;
+
+    @override
+    State<TapboxC> createState() => _TapboxCState();
+}
+
+class _TapboxCState extends State<TapboxC> {
+    bool _highlight = false;
+
+    void _handleTapDown(TapDownDetails details) {
+        setState(() {
+            _highlight = true;
+        });
+    }
+
+    void _handleTapUp(TapUpDetails details) {
+        setState(() {
+            _highlight = false;
+        });
+    }
+
+    void _handleTapCancel() {
+        setState(() {
+            _highlight = false;
+        });
+    }
+
+    void _handleTap() {
+        widget.onChanged(!widget.active);
+    }
+
+  @override
+  Widget build(BuildContext context) {
+        // This example adds a green border on tap down.
+        // On tap up, the square changes to the opposite state.
+        return GestureDetector(
+            onTapDown: _handleTapDown, // Handle the tap events in the order that
+            onTapUp: _handleTapUp, // they occur: down, up, tap, cancel
+            onTap: _handleTap,
+            onTapCancel: _handleTapCancel,
+            child: Container(
+                width: 200.0,
+                height: 200.0,
+                decoration: BoxDecoration(
+                    color: widget.active ? Colors.lightGreen[700] : Colors.grey[600],
+                    border: _highlight
+                        ? Border.all(
+                                color: Colors.teal[700]!,
+                                width: 10.0,
+                        )
+                        : null,
+                ),
+                child: Center(
+                    child: Text(widget.active ? 'Active' : 'Inactive',
+                        style: const TextStyle(fontSize: 32.0, color: Colors.white)),
+                ),
+            ),
+        );
+    }
+}
+```  
+개발자는 box가 활성 상태인지 여부를 중요하게 생각한다. 개발자는 강조 표시가 어떻게 관리되는지 신경 쓰지 않고, 탭 box가 이러한 세부 정보를 처리하는 것을 선호한다.
 
 
 //////////////
