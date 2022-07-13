@@ -189,6 +189,118 @@ void _toggleFavorite() {
 
 widget's state를 관리할 수 있는 여러 방법을 다루고, 사용가능한 다른 대화형 interactive widget을 나열하라.  
 
+<br/>
+
+## Managing state(상태 관리)  
+> **중요한 점**
+> * Managing state를 다르게 접근하라.
+> * 너는 widget 디자이너로써 사용 접근법을 선택해라
+> * 만약 의심이 든다면, parent widget 안에서 managing state 시작해라
+
+누가 stateful widget를 관리할까?  
+
+manage state 하는 가장 일반적인 방법
+* widget은 자체적 관리
+* parent는 widget's state가 관리 
+* A mix-and-match approach  
+
+어떻게 사용하고 결정할까? 결정하기를 따르도록 원칙을 도와줘라:
+* 만약 질문이 user date의 state라면, 그러면 state는 parent widget을 통해 가장 좋게 관리된다.
+* 만약 미적인 질문의 state라면, state는 widget 자체적으로 인해 가장 좋게 관리된다.  
+
+만약 의심이 든다면, parent widget 안에서 managing state 인한 시작해라.  
+
+우리는 만들어진 3개의 단순한 예에 의한 managing state의 다른 방법의 예를 줄 것이다  
+: TapboxA, TapboxB, and TapboxC  
+
+![](https://docs.flutter.dev/assets/images/docs/ui/tapbox-active-state.png)
+![](https://docs.flutter.dev/assets/images/docs/ui/tapbox-inactive-state.png)  
+
+이 예제들은 Container에 포함된 캡쳐 활동에 GestureDetector를 사용한다.  
+
+<br/>
+
+## The widget manages its own state(자체 상태를 관리하는 위젯)  
+
+때때로 내부 state widget to manage을 위한 가장 좋은 sense를 만든다.  
+대부분의 개발자들은 ListView scorolling 행위를 관리하기를 원하지 않는 ListView를 사용중이다. 그래서 ListView는 scroll offset을 자체적으로 관리한다.  
+
+_TapboxAState class:  
+ * TapboxA를 위한 Manages state
+ * box의 지금의 색깔을 결정하는 _active boolean을 정의하라
+ * box가 탭 될때 그리고 UI를 업데이트를 하는 setState() 기능을 호출할 때 _active가 업데이트를 하는 _handleTap()의 기능을 정의하라.
+ * widget을 위한 모든 상호적인 행위 요소를 구현하라  
+
+```dart
+import 'package:flutter/material.dart';
+
+// TapboxA manages its own state.
+
+//------------------------- TapboxA ----------------------------------
+
+class TapboxA extends StatefulWidget {
+    const TapboxA({super.key});
+
+    @override
+    State<TapboxA> createState() => _ TapboxAState();
+}
+
+class _TapboxAState extends State<TapboxA> {
+    bool _active = false;
+
+    void _handleTap() {
+        setState(() {
+            _active = !_active;
+        });
+    }
+
+    @override
+    Widget build(BuildContext context) {
+        return GestureDetector(
+            onTap: _handleTap,
+            child: Container(
+                width: 200.0,
+                height: 200.0,
+                decoration: BoxDecoration(
+                    color: _active ? Colors.lightGreen[700] : Colors.grey[600],
+                ),
+                child: Center(
+                    child: Text(
+                        _active ? 'Active' : 'Inactive',
+                        style: const TextStyle(fontSize: 32.0, color: Colors.white),
+                    ),
+                ),
+            ),
+        );
+    }
+}
+
+//------------------------- MyApp ----------------------------------
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Flutter Demo'),
+        ),
+        body: const Center(
+            child: TapboxA(),
+        ),
+      ),
+    );
+  }
+}
+``` 
+
+
+
+
+
 
 //////////////
 ![]() 
