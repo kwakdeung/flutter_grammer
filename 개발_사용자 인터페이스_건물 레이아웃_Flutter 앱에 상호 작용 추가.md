@@ -509,8 +509,53 @@ class _TapboxCState extends State<TapboxC> {
     }
 }
 ```  
-개발자는 box가 활성 상태인지 여부를 중요하게 생각한다. 개발자는 강조 표시가 어떻게 관리되는지 신경 쓰지 않고, 탭 box가 이러한 세부 정보를 처리하는 것을 선호한다.
+개발자는 box가 활성 상태인지 여부를 중요하게 생각한다. 개발자는 강조 표시가 어떻게 관리되는지 신경 쓰지 않고, 탭 box가 이러한 세부 정보를 처리하는 것을 선호한다.  
 
+<br/>
 
-//////////////
-![]() 
+## Other interactive widgets
+
+Flutter는 다양한 버튼과 유사한 대화형 위젯을 제공한다. 독창적인 UI로 구성 요소 집합을 정의하는  Material Design guidelines을 구현합니다. 원하는 경우 GestureDetector를 사용 하여 모든 사용자 정의 위젯에 상호 작용 기능을 구축할 수 있다. Flutter 요리책의 레시피인 핸들 탭 GestureDetector에 대해 자세히 알아보라.  
+
+> **팁:** Flutter는 Cupertino라는 iOS 스타일 위젯 세트도 제공한다.  
+
+<br/>
+
+## 표준 위젯
+* Form
+* FormField
+<br/>
+
+## Material 구성 요소
+* Checkbox
+* DropdownButton
+* TextButton
+* FloatingActionButton
+* IconButton
+* Radio
+* ElevatedButton
+* Slider
+* Switch
+* TextField
+
+<br/>
+
+## 자원
+앱에 대화형 기능을 추가할 때 도움이 될 수 있다.
+
+[gestures](https://docs.flutter.dev/cookbook/gestures), [Flutter 요리책](https://docs.flutter.dev/cookbook)의 섹션
+
+[gestures 처리](https://docs.flutter.dev/development/ui/widgets-intro#handling-gestures), [위젯 소개](https://docs.flutter.dev/development/ui/widgets-intro) 섹션  
+버튼을 만들고 입력에 응답하도록 하는 방법.
+
+[Flutter의 제스처](https://docs.flutter.dev/development/ui/advanced/gestures)  
+Flutter의 제스처 메커니즘에 대한 설명이다.
+
+[Flutter API 문서](https://api.flutter.dev/)  
+모든 Flutter 라이브러리에 대한 참조 문서입니다.
+
+Flutter Gallery [실행 앱](https://gallery.flutter.dev/), [repo](https://github.com/flutter/gallery)  
+많은 Material 구성 요소와 기타 Flutter 기능을 보여주는 데모 앱.
+
+[Flutter의 Layered 디자인](https://www.youtube.com/watch?v=dkyY9WCGMi0) (동영상)  
+이 비디오에는 상태 및 상태 비저장 위젯에 대한 정보가 포함되어 있습니다. Google 엔지니어 Ian Hickson이 발표했다.
