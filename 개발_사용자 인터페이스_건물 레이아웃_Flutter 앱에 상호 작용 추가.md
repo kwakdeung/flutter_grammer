@@ -40,7 +40,155 @@ setState() - widget의 state가 변경 시 state 객체는 setState() 호출하�
 
 <br/>
 
-## Creating a stateful widget(상태 저장 위젯 만들기)
+## Creating a stateful widget(상태 저장 위젯 만들기)  
+> ### **중요한 점**
+> * stateful widget의 하위 클래스: 1. StatefulWitget의 하위 클래스 2. State의 하위 클래스
+> * state class는 Widget의 변경 가능한 state와 build() method가 포함됨.  
+> * widget의 상태가 변경되면, state 객체는 setState()를 호출하여 프레임워크에 widget을 다시 그리도록 지시.  
+
+custom stateful widget(사용자 정의 상태 저장 위젯)을 구현하려면 2개의 class를 생성 
+* StatefulWidget의 subclass(하위 클래스)는 widget을 정의함. 
+* State의 subclass는 해당 widget의 state를 포함하고 widget의 build()메서드를 정의함.
+
+<br/>
+
+## 0단계: Get ready(준비 단계)
+building layout tutorial(6단계) 앱 빌드 후  
+  1. 환경설정 확인
+  2. 기본 "Hello World" Flutter 앱 만들기
+  3. lib/main.dart 파일을 [main.dart.](https://github.com/flutter/website/blob/main/examples/layout/lakes/step6/lib/main.dart)로 바꿈  
+  4. pubspec.yaml 파일을 [pubspec.yaml](https://github.com/flutter/website/blob/main/examples/layout/lakes/step6/pubspec.yaml)으로 바꿉니다.
+  5. 프로젝트에 image directory를 만들고 [lake.jpg](https://github.com/flutter/website/blob/main/examples/layout/lakes/step6/images/lake.jpg) 넣기  
+  
+장치를 연결하고 활성화했거나 iOS 시뮬레이터 또는 Android 에뮬레이터를 시작했다면 시작 가능함.  
+
+## 1단계: Decide which object manages the widget’s state(위젯의 상태를 관리하는 객체 결정)  
+
+Widget 자체 FavoriteWidget가 자체 상태를 관리함.  
+
+<br/>
+
+## 2단계: StatefulWidget Subclass  
+FavoriteWidget class는 자체 상태를 관리하므로 개체를 생성하기 위해 재정의함.  
+프레임워크 - Widget을 build할 때 State를 호출  
+
+이 예 에서 createState()는 다음 단계에서 구현할 _FavoriteWidgetState의 instance를 반환함.  
+
+> lib/main.dart (FavoriteWidget)
+```dart
+class FavoriteWidget extends StatefulWidget {
+    const FavoriteWidget({super.key});
+
+    @override
+    State<FavoriteWidget> createState() => _FavoriteWidgetState();
+}
+```
+> **참고:** _(밑줄): private(비공개)  
+
+<br/>
+
+## 3단계: Subclass State  
+_FavoriteWidgetState class는 Widget의 lifetime 동안 변경될 수 있는 변경 가능한 데이터를 저장함.  
+> lib/main.dart (_FavoriteWidgetState fields)   
+```dart
+class _FavoriteWidgetState extends State<FavoriteWidget> {
+    bool _isFavorited = true;
+    int _favoriteCount = 41;
+
+    // ··· 
+}
+```  
+다음은 callback function을 정의함.  
+> lib/main.dart (_FavoriteWidgetState build)  
+```dart
+class _FavoriteWidgetState extends State<FavoriteWidget> {
+  // ···
+    @override
+    Widget build(BuildContext context) {
+        return Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+                Container(
+                    padding: const EdgeInsets.all(0),
+                    child: IconButton(
+                        padding: const EdgetInsets.all(0),
+                        alignment: Alignment.centerRight,
+                        icon: (_isFavorited
+                            ? const Icon(Icons.star)
+                            : const Icon(Icons.star_border)),
+                        color: Colors.red[500],
+                        onPressed: _toggleFavorite,
+                    ),
+                ),
+                SizedBox(
+                    width: 18,
+                    child: SizedBox(
+                        child: Text('$_favoriteCount'),
+                    ),
+                ),
+            ],
+        );
+    },
+}
+```  
+> **팁:** SizedBox에 Text를 배치하고 SizedBox 너비를 설정하면 Text가 값 40과 41 사이에서 변경될 때 식별 가능한 "jump"가 방지됨. 그렇지 않으면 해당 값의 width가 다르기 때문에 jump가 발생함.  
+
+다음 두 상태 사이에서 UI를 전환하는 함수 인수 :
+* star icon과 숫자 41
+* star_border icon과 숫자 40
+
+```dart
+void _toggleFavorite() {
+    setState(() {
+        if (_isFavorited) {
+            _favoriteCount -= 1;
+            _isFavorited = false;
+        } else {
+            _favoriteCount += 1;
+            _isFavorited = true;
+        }
+    });
+}
+```  
+
+<br/>
+
+## 4단계: Plug the stateful widget into the widget tree  
+너의 custom stateful widget을 앱 build() method안에 있는 widget tree에 추가하라.
+ 1. 만든 icon과 Text를 코드를 위치시켜라, 그리고 지워라. 같은 위치에서 stateful widget을 만들어라.  
+ > layout/lakes/{step6 → interactive}/lib/main.dart
+ ```dart
+ class MyApp extends StatelessWidget {
+    const MyApp({super.key});
+    //
+                    ],
+                ),    
+            ),
+            // - Icon()
+            // -    Icons.star,
+            // -    color: Colors.red[500],
+            // - ),
+            // - const Text('41'),
+            const FavoriteWidget(), // +
+            ],
+        ),
+    );
+}
+ ```  
+ 앱을 hot reload할때, 그 star icon은 지금 탭에 반응해야 한다.  
+
+문제?  
+만약 너가 코드를 실행할 수 없다면, 보라 너의 IDE에서 에러를 찾아라. 
+여전히 찾을 수 없다면 Github 예제 코드와 비교하라.  
+
+[lib/main.dart](https://github.com/flutter/website/blob/main/examples/layout/lakes/interactive/lib/main.dart)
+[pubspec.yaml](https://github.com/flutter/website/blob/main/examples/layout/lakes/interactive/pubspec.yaml)
+[lakes.jpg](https://github.com/flutter/website/blob/main/examples/layout/lakes/interactive/images/lake.jpg)  
+
+만약 너가 여전히 질문을 한다면, 개발 커뮤니티 채널에 물어봐라.  
+
+widget's state를 관리할 수 있는 여러 방법을 다루고, 사용가능한 다른 대화형 interactive widget을 나열하라.  
+
 
 //////////////
 ![]() 
