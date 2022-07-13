@@ -23,8 +23,22 @@ Layout Build 자습서 에서는 다음 스크린샷의 레이아웃을 만드�
 
 상태를 관리하는 다양한 방법을 시도하려면 상태 관리 설명으로 건너뛰기.
 
+<br/>
 
+## Stateful and stateless widgets(상태 저장 및 상태 비저장 위젯)
 
+Widget은 Stateful 또는 Stateless.  
+Stateful Witget - 위젯 변경 가능, 동적
+* 예) Checkbox, Radio, Slider, InkWell, Form, TextField 
+Stateless Witget - 위젯 변경 불가능, 고정, 정적 
+* 예) Icon, IconButton, Text
+
+Widget의 State는 State 객체에 저장되어 위젯의 상태의 모양과 분리.
+setState() - widget의 state가 변경 시 state 객체는 setState() 호출하여 프레임워크에 widget을 다시 그리도록 지시
+
+<br/>
+
+## Creating a stateful widget(상태 저장 위젯 만들기)
 
 //////////////
-![레이아웃 튜토리얼 앱](https://docs.flutter.dev/assets/images/docs/ui/layout/lakes.jpg) 
+![]() 
