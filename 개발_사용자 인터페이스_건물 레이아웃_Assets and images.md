@@ -126,3 +126,28 @@ return const AssetImage('icons/heart.png', package: 'my_icons');
 ```  
 Assets는 위와 같이 자체적으로 package argument 사용하여 가져와야 하는 package에 의해 사용되었다.  
 
+### Bundling of package assets  
+만약 훌륭한 asset이 package의 pubspec.yaml 파일 안에서 명확하다면, 그것은 application과 함께 자동적으로 번들되었다. 부분적으로, assets은 자체적으로 pubspec.yaml에서 틀림없이 명확하게 package로 사용되었다.  
+package는 지정되지 않은 asset을 폴더에 포함하도록 선택할 수 있다.  
+```dart
+.../lib/backgrounds/background1.png
+.../lib/backgrounds/background2.png
+.../lib/backgrounds/background3.png
+```  
+첫번째 image를 포함하는 것은 application의 pubspec.yaml은 assets 부문 안에서 명확해야 한다.  
+```dart
+flutter:
+  assets:
+    - packages/fancy_backgrounds/backgrounds/background1.png
+```  
+lib/은 함축된다. 그래서 그것은 asset path에 포함되지 않는다.  
+만약 너가 package를 developing 하고 싶다면, package 내부에서 asset을 로드 하려면 package의 ‘pubspec.yaml’ 지정해라:  
+```dart
+flutter:
+  assets:
+    - assets/images/
+```
+너의 package 내부의 이미지를 로드 하는 것, use:  
+```dart
+return const AssetImage('packages/fancy_backgrouds/backgrounds/background1.png');
+```
