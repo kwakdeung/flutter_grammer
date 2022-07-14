@@ -7,14 +7,19 @@ Flutter's animation은 다양한 animation 타입들의 요소를 쉽게 만드�
 
 플러터 안에서 animation들을 만들 수 있는 다른 접근 방식이다.
 
-![Flutter Animation Widget 올바른 선택법이 무엇인가?](https://www.youtube.com/watch?v=GXIJJkq_H8g)  
+[![How to choose which Flutter Animation Widget is right for you? - Flutter in Focus](http://img.youtube.com/vi/GXIJJkq_H8g/0.jpg)](https://youtu.be/GXIJJkq_H8g)
+
 
 위의 비디오를 본 것과 같이, **의사 결정 tree(밑에 이미지)** 는 flutter에서 이행할 때 사용할 접근 방식을 결정할 수 있도록 도울 것이다.  
 ![](https://docs.flutter.dev/assets/images/docs/ui/animations/animation-decision-tree.png)  
 
 만약 미리 package된 절대적인 animation이 너의 요구 사항에 맞는다면, [절대적인 animations과 함께한 Animation 기본들](https://www.youtube.com/watch?v=IVTjpW3W33s&list=PLjxrf2q8roU2v6UqYlt_KPaXlnjbYySua&index=2)을 보아라. 그리고 [동반한 기사](https://medium.com/flutter/flutter-animation-basics-with-implicit-animations-95db481c5916)를 보아라. 
 
-![절대적인 animations과 함께한 Animation 기본들](https://www.youtube.com/watch?v=IVTjpW3W33s&list=PLjxrf2q8roU2v6UqYlt_KPaXlnjbYySua&index=2)  
+
+[![Animation Basics with Implicit Animations](http://img.youtube.com/vi/IVTjpW3W33s?list=PLjxrf2q8roU2v6UqYlt_KPaXlnjbYySua/0.jpg)](https://youtu.be/IVTjpW3W33s?list=PLjxrf2q8roU2v6UqYlt_KPaXlnjbYySua)
+
+![절대적인 animations과 함께한 Animation 기본들]()
+  
 
 명백한 animation을 만드는 것은 아마도 명백한 animation 클래스들 built-in 중 하나를 사용할 수 있다.([동반한 기사](https://medium.com/flutter/directional-animations-with-built-in-explicit-animations-3e7c5e6fbbd7))
 
