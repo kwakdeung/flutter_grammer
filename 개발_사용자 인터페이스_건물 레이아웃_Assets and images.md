@@ -218,3 +218,19 @@ Flutter project's 루트 디렉토리에서 .../ios/Runner.를 탐색하라.
 Assets.xcassets/AppIcon.appiconset 디렉토리는 이미 포함된 이미지이다.  
 ![](https://docs.flutter.dev/assets/images/docs/assets-and-images/ios-icon-path.png)  
 
+<br/>
+
+## Updating the launch screen(실행 화면을 업데이트 하는 것)  
+![](https://docs.flutter.dev/assets/images/docs/assets-and-images/launch-screen.png)  
+Flutter는 프레임워크 로딩을 하는 동안 transitional launch 스크린들을 그리기 위해 native platform mechanisms 또한 사용한다.  
+
+### Android  
+.../android/app/src/main에 splash screen을 추가하라.  
+
+### iOS
+ .../ios/Runner. 이미지의 center에 splash screen을 추가하라.  
+ 다른 파일 이름을 사용하는 경우 동일한 디렉토리에서 LaunchImage.pngLaunchImage@2x.pngLaunchImage@3x.pngContents.json 파일의 이름을 개선해라.  
+ ![](https://docs.flutter.dev/assets/images/docs/assets-and-images/ios-launchscreen-xcode.png)  
+
+ 자세히보기: [splash screen 추가](https://docs.flutter.dev/development/ui/advanced/splash-screen)
+  
