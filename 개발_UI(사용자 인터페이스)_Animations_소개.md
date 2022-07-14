@@ -27,7 +27,10 @@ custom implicit animation을 만드는 것은  TweenAnimationBuilder와 함께 o
 [![Making Your First Directional Animations with Built-in Explicit Animations](http://img.youtube.com/vi/CunyH6unILQ/0.jpg)](https://youtu.be/CunyH6unILQ)
 
 만약 scratch로부터 명백한 animation이 build가 필요하다면, AnimatedBuilder와 AnimatedWidget이 함께 custom explicit(명백한) animations 만드는 것은 보여줘라.([동반한 기사](https://medium.com/flutter/when-should-i-useanimatedbuilder-or-animatedwidget-57ecae0959e8))  
-  
+
+[![Creating custom explicit animations with AnimatedBuilder & AnimatedWidget - Flutter in Focus](http://img.youtube.com/vi/fneC7t4R_B0/0.jpg)](https://youtu.be/fneC7t4R_B0)
+
+
 animation을 단순한 깊은 이해를 위해 작업한다. 
 
 [Animation 깊은 dive](https://www.youtube.com/watch?v=PbcILiN8rbo&list=PLjxrf2q8roU2v6UqYlt_KPaXlnjbYySua&index=6) 보여줘라.([동반한 기사](https://medium.com/flutter/animation-deep-dive-39d3ffea111f))  
