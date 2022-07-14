@@ -37,6 +37,8 @@ animation을 단순한 깊은 이해를 위해 작업한다.
 
 [![Animation deep dive - Flutter in Focus](http://img.youtube.com/vi/PbcILiN8rbo/0.jpg)](https://youtu.be/PbcILiN8rbo)
 
+<br/>
+
 ## Codelabs, 튜토리얼, 기사  
 
 다음 resources는 Flutter animation framework를 배우기 시작하기 좋은 장소이다. 각각의 문서들은 animation code 작성법을 보여준다.  
@@ -59,10 +61,14 @@ form을 만드는 법을 설명하는 Codelab은 fields안에 그들을 채워�
 
 일반적으로, animation들은 **tween** 또는 **Physics-based(물리적 기반)** 이다. 다음 부문들은 용어 의미와 더욱 배울 때 resource의 중요한 점을 설명한다.  
 
+<br/>
+
 ### Tween animation  
 Tween animation에 타임라인, 타이밍과 변형의 속도를 정의한 curve를 시작과 끝 시점들에 정의된다. 
 
 above한 Animations 튜토리얼 리스트된 문서는 tweening에 대해 명확하지 못하다. 그러나 예시들 중에서 tweens를 사용한다.
+
+<br/>
 
 ### Physics-based(물리적 기반) animation  
 Physics-based(물리적 기반) animation 안에 모션은 현실 세계 행위의 비슷한 본보기가 되어있다.  
