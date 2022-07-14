@@ -84,4 +84,45 @@ return const Image(image: AssetImage('graphics/background.png));
 기본 asset 번들을 사용하는 모든 항목은 이미지를 로드할 때 해상도 인식을 상속한다.  
 >**참고:** 디바이스 픽셀 비율이 Material 또는 CupertinoApp 중 하나는 MediaQueryData.size에 의존한다. 
 
-### Declaring resolution-aware image assets(해상도 인식 이미지 asset 선언)
+### Declaring resolution-aware image assets(해상도 인식 이미지 asset 선언)  
+AssetImage는 현재 디바이스 pixel ratio에서 가장 가까이 매치된 논리적으로 요청된 asset 매핑 사용법을 이해한다.  
+일하기 위해 매핑을 하기 위해서, asset은 특히 디렉토리 구조에 따라서 배열되어야 한다.
+```dart
+.../image.png
+.../Mx/image.png
+.../Nx/image.png
+...etc.
+```  
+M과 N은 내부에 포함된 이미지의 명목상 해결책에 반응하는 숫자 판별자이다.  
+다시 말하면, 그들은 의도된 이미지의 특정한 디바이스 pixel ratio이다.  
+main asset은 1.0의 해결책에 해당되게 가장되었다.  
+예를 들어, my_icon.png 이미지를 위해 asset 레이아웃을 고려하라.
+```dart
+.../my_icon.png
+.../2.0x/my_icon.png
+.../3.0x/my_icon.png
+```
+디바이스 픽셀 비율이 1.8x -> .../2.0x/my_icon.png 선택  
+디바이스 픽셀 비율이 2.7x -> .../3.0x/my_icon.png 선택  
+
+pubspec.yaml의 asset 부문에 있는 각 항목은 main asset 입장을 제외하고 실제 파일과 **일치**해야 합니다.  
+항목은 여전히 pubspec.yaml의 manifest안에서 포함되어야 합니다.  
+
+<br/>
+
+## Asset images in package dependencies(종속)  
+
+**package dependency**로부터 **이미지를 로드** 하는 것, 그 package argument(논쟁)은 **AssetImage**에 틀림없이 제공되어야 한다. 
+```dart
+.../pubspec.yaml
+.../icons/heart.png
+.../icons/1.5x/heart.png
+.../icons/2.0x/heart.png
+...etc.
+```
+이미지를 로드 하는 것, use:  
+```dart
+return const AssetImage('icons/heart.png', package: 'my_icons');
+```  
+Assets는 위와 같이 자체적으로 package argument 사용하여 가져와야 하는 package에 의해 사용되었다.  
+
