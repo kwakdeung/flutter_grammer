@@ -198,3 +198,23 @@ UIImage.flutterImageNamed("icons/heart.png")
 ```  
 ### Loading iOS images in Flutter  
 pub.dev의 **ios_platform_images** plugin을 사용하라  
+
+<br/>
+
+## assets 플랫폼  
+
+### Updating the app icon  
+Flutter 애플리케이션의 실행 아이콘 업데이트는 기본 Android 또는 iOS 애플리케이션의 실행 아이콘을 업데이트하는 것과 같은 방식으로 작동한다.  
+![](https://docs.flutter.dev/assets/images/docs/assets-and-images/icon.png)
+
+### Android
+Flutter project's 루트 디렉토리에서 .../android/app/src/main/res.를 탐색하라  
+![](https://docs.flutter.dev/assets/images/docs/assets-and-images/android-icon-path.png) 
+>**참고:** 만약 너가 .png 파일의 이름을 변경한다면, 틀림없이 AndroidManifest.xml’s <application> tag’s android:icon 속성에서도 이름을 업데이트를 해야한다.   
+<br/>
+
+### iOS
+Flutter project's 루트 디렉토리에서 .../ios/Runner.를 탐색하라.  
+Assets.xcassets/AppIcon.appiconset 디렉토리는 이미 포함된 이미지이다.  
+![](https://docs.flutter.dev/assets/images/docs/assets-and-images/ios-icon-path.png)  
+
