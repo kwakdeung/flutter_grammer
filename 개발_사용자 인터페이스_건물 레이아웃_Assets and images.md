@@ -150,4 +150,51 @@ flutter:
 너의 package 내부의 이미지를 로드 하는 것, use:  
 ```dart
 return const AssetImage('packages/fancy_backgrouds/backgrounds/background1.png');
-```
+```  
+
+<br/>
+
+## Sharing assets with the underlying platform(기본적인 플랫폼과 함께 assets를 공유하는 것)  
+
+### Loading Flutter assets in Android(안드로이드 버전)  
+
+Android의 assets은 AssetManager API를 통해 이용 가능하다.  
+
+예를 들면, 너는 pubspec.yaml 안에 명확하게 지정하라.  
+```dart
+flutter:
+  assets:
+    - icons/heart.png
+```  
+이것은 너의 Flutter 앱에 다음 구조를 반영한다.  
+```dart
+.../pubspec.yaml
+.../icons/heart.png
+...etc.
+```  
+너의 **Java plugin code**로부터 **icons/heart.png을 허용**하는 것:  
+```dart
+AssetManager assetManager = registrar.context().getAssets();
+String key = registrar.lookupKeyForAsset("icons/heart.png");
+AssetFileDescriptor fd = assetManager.openFd(key);
+```  
+
+### Loading Flutter assets in iOS(iOS 버전)  
+iOS의 assets은 mainBundle을 통해 이용 가능하다.  
+
+너의 **Objective-C(C언어) plugin code**로부터 **icons/heart.png 허용** 하는 것:  
+```dart
+NSString* key = [registrar lookupKeyForAsset:@"icons/heart.png"]
+NSString* path = [[NSBundle mainBundle] pathForResource:key ofType:nil];
+```  
+
+**Objective-C(C언어):**
+```dart
+[UIImage flutterImageWithName:@"icons/heart.png"];
+```  
+**Swift:**
+```dart
+UIImage.flutterImageNamed("icons/heart.png")
+```  
+### Loading iOS images in Flutter  
+pub.dev의 **ios_platform_images** plugin을 사용하라  
