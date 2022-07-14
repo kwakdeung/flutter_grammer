@@ -22,7 +22,7 @@ Flutter's animation은 다양한 animation 타입들의 요소를 쉽게 만드�
 명백한 animation을 만드는 것은 아마도 명백한 animation 클래스들 built-in 중 하나를 사용할 수 있다.([동반한 기사](https://medium.com/flutter/directional-animations-with-built-in-explicit-animations-3e7c5e6fbbd7))
 
 
-[![Animation Basics with Implicit Animations](http://img.youtube.com/vi/IVTjpW3W33s/0.jpg)](https://youtu.be/IVTjpW3W33s) 
+[![Making Your First Directional Animations with Built-in Explicit Animations](http://img.youtube.com/vi/CunyH6unILQ/0.jpg)](https://youtu.be/CunyH6unILQ) 
 
 
 만약 scratch로부터 명백한 animation이 build가 필요하다면, AnimatedBuilder와 AnimatedWidget이 함께 custom explicit(명백한) animations 만드는 것은 보여줘라.([동반한 기사](https://medium.com/flutter/when-should-i-useanimatedbuilder-or-animatedwidget-57ecae0959e8))  
