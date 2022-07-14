@@ -73,4 +73,54 @@ Flutter cookbook의 animation들의 부문 안에서의 레시피
 * [Flutter 갤러리](https://github.com/flutter/gallery)
 Material Components 아래에 Grid 예시는 fling animation을 설명한다. grid와 Zoom 안으로부터 이미지 중 하나를 선택하라. flinging or dragging gestures의 이미지를 이동할 수 있다.  
 
-* **AnimationController.animateWith**와 **SpringSimulation**을 위한 API 문서를 보아라
+* **AnimationController.animateWith**와 **SpringSimulation**을 위한 API 문서를 보아라  
+
+<br/>
+
+## Pre-canned(미리 취소된) animations  
+만약 Material widgets을 사용 중이라면, 너는 pub.dev에서 이용 가능한지 animations package를 확인 할지도 모른다.  
+package는 다음 공통적으로 사용된 패턴을 위한 미리 built된 animations를 포함한다: Container는 공유된 axis transitions(변형), transitions(변형)에 의한 fade(시들해진 것), 그리고 변형이 시들해진 것.  
+
+<br/>
+
+## Common animation patterns  
+대부분 UX 또는 motion 디자이너는 UI 디자인을 할 때 반복하여 사용된 명확한 animation patterns를 찾는다. 공통적으로 사용된 animation patterns과 list된 이 부문은 더욱 배우라고 말한다.  
+
+### Animated list or grid
+이 패턴은 list와 grid로부터 요소들의 추가 또는 제거 animating된 것 포함한다.  
+* [AnimatedList example](https://flutter.github.io/samples/animations.html)  
+list에 요소를 추가하거나 선택한 요소를 제거하는 애니메이션 방법  
+
+### Shared element transition  
+이 패턴은 유저가 페이지로부터 종종 이미지의 요소를 선택한다. 그리고 UI는 더욱 디테일하게 새로운 페이지의 선택된 요소를 animate한다.  
+* **Hero animations**의 2개의 스타일을 만드는 방법:  
+  * position과 size가 변화하는 동안 hero 파일들이 한 페이지에서 다른 페이지로 넘어간다.
+  * 파일들이 한 페이지에서 다른 페이지로 넘어감으로써 hero boundary는 원형에서 네모로 shape(모양)가 변화한다.  
+
+* [Flutter 갤러리](https://github.com/flutter/gallery)  
+자체적으로 갤러리 앱에 build 하거나 또는 Play Store로부터 다운로드를 할 수 있다.
+
+* [Hero](https://api.flutter.dev/flutter/widgets/Hero-class.html), [Navigator](https://api.flutter.dev/flutter/widgets/Navigator-class.html), and [PageRoute](https://api.flutter.dev/flutter/widgets/PageRoute-class.html) class들의 API 문서를 보아라.  
+
+### Staggered(엇갈린) animation  
+작은 모션들이 부러진 Animations은 늦춰졌다. 가장 작은 animations 순차적으로 또는 부분적으로 또는 완전히 overlap(오버랩)된다.  
+* [Staggered Animations](https://docs.flutter.dev/development/ui/animations/staggered-animations)  
+
+<br/>
+
+## Other resources  
+다음 링크를 통해 **Flutter animations**에 대하여 더욱 배워라:  
+* [Animation samples](https://github.com/flutter/samples/tree/main/animations#animation-samples) from the [Sample app catalog](https://flutter.github.io/samples/#).  
+
+* [Animation recipes](https://docs.flutter.dev/cookbook/animation) from the Flutter cookbook.
+
+* [Animation videos](https://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw/search?query=animation) from the Flutter YouTube channel.
+
+* [Animations: overview(개요)](https://docs.flutter.dev/development/ui/animations/overview)  
+animations library와 Flutter’s animation 구조에서 주요한 클래스들을 본다.
+
+* [Animation and motion widgets](https://docs.flutter.dev/development/ui/widgets/animation)  
+animation widgets의 한 카탈로그는 Flutter APIs를 제공한다.
+
+* The [animation library](https://api.flutter.dev/flutter/animation/animation-library.html) in the [Flutter API documentation](https://api.flutter.dev/)  
+Flutter framework를 위한 animation API이다. 이 링크는 library(라이브러리)를 위한 기술적인 개요 페이지를 보여준다.
