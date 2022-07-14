@@ -37,3 +37,40 @@ animation을 단순한 깊은 이해를 위해 작업한다.
 
 [![Animation deep dive - Flutter in Focus](http://img.youtube.com/vi/PbcILiN8rbo/0.jpg)](https://youtu.be/PbcILiN8rbo)
 
+## Codelabs, 튜토리얼, 기사  
+
+다음 resources는 Flutter animation framework를 배우기 시작하기 좋은 장소이다. 각각의 문서들은 animation code 작성법을 보여준다.  
+
+* [Implicit(절대적인) animations codelab](https://docs.flutter.dev/codelabs/implicit-animations)  
+단계별 지시서와 상호적인 예로 절대적인 animations 사용법을 다룬다.  
+
+* [Animations 튜토리얼](https://docs.flutter.dev/development/ui/animations/tutorial)  
+Flutter animation package(controllers, Animatable, curves, listeners, builders)를 기본적인 클래스들을 설명하라. animation API's의 다른 측면을 사용하여 20개의 animation 진행을 통해 안내한다.  
+
+* [Zero to One with Flutter, part 1](https://medium.com/flutter/zero-to-one-with-flutter-43b13fd7b354) and [part 2](https://medium.com/flutter/zero-to-one-with-flutter-part-two-5aa2f06655cb)  
+tweening을 사용한 animated된 차트를 만드는 법을 중간 기사들은 보여준다.  
+
+* [Write your first Flutter app on the web](https://docs.flutter.dev/get-started/codelab-web)  
+form을 만드는 법을 설명하는 Codelab은 fields안에 그들을 채워줌으로써 보여주는 유저들의 진행을 animation을 사용한다.  
+
+<br/>
+
+## Animation 유형들  
+
+일반적으로, animation들은 **tween** 또는 **Physics-based(물리적 기반)** 이다. 다음 부문들은 용어 의미와 더욱 배울 때 resource의 중요한 점을 설명한다.  
+
+### Tween animation  
+Tween animation에 타임라인, 타이밍과 변형의 속도를 정의한 curve를 시작과 끝 시점들에 정의된다. 
+
+above한 Animations 튜토리얼 리스트된 문서는 tweening에 대해 명확하지 못하다. 그러나 예시들 중에서 tweens를 사용한다.
+
+### Physics-based(물리적 기반) animation  
+Physics-based(물리적 기반) animation 안에 모션은 현실 세계 행위의 비슷한 본보기가 되어있다.  
+
+* [Animate a widget using a physics simulation](https://docs.flutter.dev/cookbook/animation/physics-simulation)  
+Flutter cookbook의 animation들의 부문 안에서의 레시피  
+
+* [Flutter 갤러리](https://github.com/flutter/gallery)
+Material Components 아래에 Grid 예시는 fling animation을 설명한다. grid와 Zoom 안으로부터 이미지 중 하나를 선택하라. flinging or dragging gestures의 이미지를 이동할 수 있다.  
+
+* **AnimationController.animateWith**와 **SpringSimulation**을 위한 API 문서를 보아라
