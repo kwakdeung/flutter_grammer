@@ -61,4 +61,35 @@ simulations의 원칙 안에서 **상태 변화가 없다(stateless).** 그러�
 
 **다양한 효과를 위해** Simulation 클래스의 **various concrete(구체적인) implementations(구현)**이다.  
 
+### Animatables
 
+추상적인 클래스인 Animatable은 특정한 타입의 2배의 값을 매핑한다.
+
+Animatable class들은 **stateless(상태가 없고) 고정적**이다.  
+
+### - Tweens
+0.0 to 1.0 사이를 지나 animate 하는 것은 시작과 끝 값 사이에 삽입하는 Tween<T>을 사용할 수 있다.  
+Animatable class인 Tween 클래스들은 **stateless(상태가 없고) 고정적**이다.  
+
+### - Composing animatables  
+Animatable’s chain() method에서 Animatable<double> (the parent)를 통과시키는 것은 parent들을 매핑하여 적용시키고 다음 child들이 매핑할 때 새로운 Animatable 하위 클래스를 만든다.  
+
+<br/>
+
+### Curves  
+
+추상적인 클래스 Curve는 범위 0.0-1.0 안의 두 배에 범위 0.0-1.0 안의 명목상 두 배로 매핑한다.  
+Animatable class인 Curves 클래스는 **stateless(상태가 없고) 고정적**이다.  
+
+<br/>
+
+### Animations  
+
+추상적인 클래스 Animation은 animation 방향과 animation status(상태)의 개념 그리고 register의 listener 인터페이스는 값과 상태 변화가 포함된 콜백하는 것은 주어진 유형의 값을 제공한다.  
+
+Animation의 하위클래스들은 변화가 없는 값(kAlwaysCompleteAnimation, kAlwaysDismissedAnimation, AlwaysStoppedAnimation)을 가진다.  
+
+### - Animation controllers  
+
+**Animation controllers**는 자체적으로 주어진 Ticker를 사용한 Animation<double> 상태가 변한다.(stateful) 그것은 시작될 수 있고 멈출 수 도 있다. 
+### - Attaching animatables to animations 
