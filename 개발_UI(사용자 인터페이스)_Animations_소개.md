@@ -15,21 +15,20 @@ Flutter's animation은 다양한 animation 타입들의 요소를 쉽게 만드�
 
 만약 미리 package된 절대적인 animation이 너의 요구 사항에 맞는다면, [절대적인 animations과 함께한 Animation 기본들](https://www.youtube.com/watch?v=IVTjpW3W33s&list=PLjxrf2q8roU2v6UqYlt_KPaXlnjbYySua&index=2)을 보아라. 그리고 [동반한 기사](https://medium.com/flutter/flutter-animation-basics-with-implicit-animations-95db481c5916)를 보아라. 
 
-
 [![Animation Basics with Implicit Animations](http://img.youtube.com/vi/GXIJJkq_H8g/0.jpg)](https://youtu.be/GXIJJkq_H8g)
-  
+
+custom implicit animation을 만드는 것은  TweenAnimationBuilder와 함께 own custom implicit animations를 만든 것을 보여준다.[동반한 기사](https://medium.com/flutter/custom-implicit-animations-in-flutter-with-tweenanimationbuilder-c76540b47185)
+
+[![Creating your own Custom Implicit Animations with TweenAnimationBuilder](http://img.youtube.com/vi/6KiPEqzJIKQ/0.jpg)](https://youtu.be/6KiPEqzJIKQ)
+ 
 
 명백한 animation을 만드는 것은 아마도 명백한 animation 클래스들 built-in 중 하나를 사용할 수 있다.([동반한 기사](https://medium.com/flutter/directional-animations-with-built-in-explicit-animations-3e7c5e6fbbd7))
 
-
-[![Making Your First Directional Animations with Built-in Explicit Animations](http://img.youtube.com/vi/CunyH6unILQ/0.jpg)](https://youtu.be/CunyH6unILQ) 
-
+[![Making Your First Directional Animations with Built-in Explicit Animations](http://img.youtube.com/vi/CunyH6unILQ/0.jpg)](https://youtu.be/CunyH6unILQ)
 
 만약 scratch로부터 명백한 animation이 build가 필요하다면, AnimatedBuilder와 AnimatedWidget이 함께 custom explicit(명백한) animations 만드는 것은 보여줘라.([동반한 기사](https://medium.com/flutter/when-should-i-useanimatedbuilder-or-animatedwidget-57ecae0959e8))  
-![AnimatedBuilder와 AnimatedWidget이 함께 custom explicit(명백한) animations 만드는 것](https://youtu.be/fneC7t4R_B0)  
+  
 animation을 단순한 깊은 이해를 위해 작업한다. 
-
-[![Creating your own Custom Implicit Animations with TweenAnimationBuilder](http://img.youtube.com/vi/6KiPEqzJIKQ/0.jpg)](https://youtu.be/6KiPEqzJIKQ)
 
 [Animation 깊은 dive](https://www.youtube.com/watch?v=PbcILiN8rbo&list=PLjxrf2q8roU2v6UqYlt_KPaXlnjbYySua&index=6) 보여줘라.([동반한 기사](https://medium.com/flutter/animation-deep-dive-39d3ffea111f))  
 
