@@ -43,4 +43,22 @@ Tween과 lerp(lerp 메서드- 시계 값을 통해) function을 상속하는 너
 
 <br/>
 
-## Architecture
+## Architecture  
+
+Animation들은 core building blocks 중 하나는 정말로 built가 되어있다.  
+
+### Scheduler  
+SchedulerBinding은 초기 Flutter scheduling 이 나타난 singleton 클래스이다.  
+
+### Tickers  
+Ticker 클래스는 scheduleFrameCallback() mechanism으로 인해 매번 tick마다 **콜백(다시 불러오기)** 을 호출한다.  
+Ticker는 시작되거나 멈추게 될 것이다. 시작될 때, **멈출 때 해결하기 위해 **Future**를 리턴**한다.  
+각각의 Tick은 시작된 후에 첫번 째 tick 이후로 함께 콜백을 제공한다.  
+
+### Simulations
+추상적인 클래스 Simulation은 상대적인 시간 값을 2배의 값에 매핑한다. 그리고 완성을 알린다.  
+simulations의 원칙 안에서 **상태 변화가 없다(stateless).** 그러나 실제 어떤 simulation은 **queried 될 때** 돌이킬 수 없을 정도로 **state(상태)가 변한다.**  
+
+**다양한 효과를 위해** Simulation 클래스의 **various concrete(구체적인) implementations(구현)**이다.  
+
+
