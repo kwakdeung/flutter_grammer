@@ -1,0 +1,4 @@
+#Fri Jul 15 13:45:53 KST 2022
+base.0=/Applications/jubileebio/flutter_grammer/Develop/ex10_05_simultaneous_animations/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
