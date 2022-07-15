@@ -5,6 +5,7 @@ Flutter의 animation system은 **유형이 있는 Animated 객체들** **기본�
 animation 시스템의 주요한 building block은 Animation 클래스이다.  
 animation을 수행하는 대부분의 위젯은 animation의 현재 값을 읽고 해당 값의 변경 사항을 수신하는 parameter로 개체를 받는다.  
 <br/>
+
 ### addListener  
 
 **animation's의 값 변화**가 올 때, addListener와 함께 **추가된 모든 listeners에게 알린다**.  
