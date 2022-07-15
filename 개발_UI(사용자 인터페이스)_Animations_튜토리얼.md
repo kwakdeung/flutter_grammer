@@ -21,4 +21,9 @@ animation library안에 **필수적인 개념들, 클래스들, 메서드들**�
 > * **Tween**은 animated된 객체에 의해 사용된 data 범위 사이에 삽입한다.
 > * **Listener**(s) 와 **StatusListener**(s): animation 상태 변화 감시  
 
-animation 시스템은 **Animation** 객체들의 유형이 based 되어있다.
+animation 시스템은 **Animation** 객체들의 유형이 based 되어있다.  
+
+## - Animation<double>  
+Flutter Animation 객체는 스크린에서 무엇을 보여주는지 아무것도 모른다는 것을 알고 있다.   
+Animation은 현재 값과 (완료 또는 해체)상태를 이해하는 추상 클래스이다.  
+Animation<double>: 많이 공통적으로 사용된 animation type들 중 하나
