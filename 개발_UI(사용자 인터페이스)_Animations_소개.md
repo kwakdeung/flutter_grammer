@@ -129,4 +129,4 @@ animations library와 Flutter’s animation 구조에서 주요한 클래스들�
 animation widgets의 한 카탈로그는 Flutter APIs를 제공한다.
 
 * The [animation library](https://api.flutter.dev/flutter/animation/animation-library.html) in the [Flutter API documentation](https://api.flutter.dev/)  
-Flutter framework를 위한 animation API이다. 이 링크는 library(라이브러리)를 위한 기술적인 개요 페이지를 보여준다.
+Flutter framework를 위한 animation API이다. 이 링크는 library(라이브러리)를 위한 기술적인 개요 페이지를 보여준다.  
