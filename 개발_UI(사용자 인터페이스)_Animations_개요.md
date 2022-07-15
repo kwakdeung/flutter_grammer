@@ -91,5 +91,8 @@ Animation의 하위클래스들은 변화가 없는 값(kAlwaysCompleteAnimation
 
 ### - Animation controllers  
 
-**Animation controllers**는 자체적으로 주어진 Ticker를 사용한 Animation<double> 상태가 변한다.(stateful) 그것은 시작될 수 있고 멈출 수 도 있다. 
-### - Attaching animatables to animations 
+**Animation controllers**는 자체적으로 주어진 Ticker를 사용한 Animation<double> 상태가 변한다.(stateful) 그것은 시작될 수 있고 멈출 수 도 있다.  
+
+### - Attaching animatables to animations  
+
+Animation<double> (the new parent)에서 an Animatable’s animate() method를 통과 시키는 것은 주어진 parent가 작동된 Animatable와 같은 행동하는 새로운 Animation 하위클래스를 만든다.
