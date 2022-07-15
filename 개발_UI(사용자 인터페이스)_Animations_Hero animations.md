@@ -30,7 +30,7 @@ standard hero animation은 한 route에서 새로운 route로 날아다닌다.(�
 [![Standard Hero Animation](http://img.youtube.com/vi/CEcFnqRDfgw/0.jpg)](https://youtu.be/CEcFnqRDfgw)  
 
 
-**Radial hero animations**
+**Radial hero animations**  
 radial hero animation에서 hero는 route들 사이로 날아갈 때 모양이 원을 탭하면 원에서 직사각형으로 변경된다.  
 
 [![Radial Hero Animation](http://img.youtube.com/vi/LWKENpwDKiM/0.jpg)](https://youtu.be/LWKENpwDKiM)  
