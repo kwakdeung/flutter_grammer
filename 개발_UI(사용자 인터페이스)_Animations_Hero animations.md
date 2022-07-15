@@ -35,4 +35,151 @@ radial hero animation에서 hero는 route들 사이로 날아갈 때 모양이 �
 
 [![Radial Hero Animation](http://img.youtube.com/vi/LWKENpwDKiM/0.jpg)](https://youtu.be/LWKENpwDKiM)  
 
-hero animation의 기본 구조 &rarr; hero animation 코드를 구성하는 방법 &rarr; 장면 뒤에서 Flutter가 hero animation을 수행하는 방법
+hero animation의 기본 구조 &rarr; hero animation 코드를 구성하는 방법 &rarr; 장면 뒤에서 Flutter가 hero animation을 수행하는 방법  
+
+<br/>
+
+## Basic structure of a hero animation(hero animation의 기본 구조)  
+
+HeroAnimation 클래스는 source와 PhotoHeroes의 목적, 변형을 set up하도록 생성한다.  
+Here’s the code:  
+```dart
+class HeroAnimation extends StatelessWidget {
+    Widget build(BuildContext context) {
+        timeDilation = 5.0 // 1.0 - 일반적인 animation 속도
+
+        return Scafford(
+            appBar: AppBar(
+                title: const Text('Basic Hero Animation'),
+            ),
+            body: Center(
+                child: PhotoHero(
+                    photo: 'images/flippers-alpha.png',
+                    width: 300.0,
+                    onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute<void>(
+                            builder: (BuildContext context) {
+                                return Scaffold(
+                                    appbar: Appbar(
+                                        title: const Text('Flippers Page'),
+                                    ),
+                                    body: Container(
+                                        // 파란 배경은 새로운 route로 강조한다.
+                                        color: Colors.lightBlueAccent,
+                                        padding: const EdgeInsets.all(16.0),
+                                        alignment: Alignment.topLeft,
+                                        child: PhotoHero(
+                                            photo: 'images/flippers-alpha.png'
+                                            width: 100.0,
+                                            onTap: () {
+                                                Navigator.of(context).pop();
+                                            },
+                                        ),
+                                    ),
+                                );
+                            }
+                        ));
+                    },
+                ),
+            ),
+        );
+    }
+}
+```  
+
+## Radial hero animations  
+
+> **중요한 점**
+> * radial 원에서 사각형으로 변형 animates해라.  
+> * radial hero animation은 source route에서 destination route로 hero가 날아다니는 동안 radial 변형을 수행해라.
+> * MaterialRectCenter­Arc­Tween에서 tween animation을 정의해라.
+> * PageRouteBuilder를 사용하도록 destination route를 build해라  
+
+> **Radial hero animation code**  
+> * [radial_hero_animation](https://github.com/flutter/website/tree/main/examples/_animation/radial_hero_animation)  
+> * [basic_radial_hero_animation](https://github.com/flutter/website/tree/main/examples/_animation/basic_radial_hero_animation)  
+> * [radial_hero_animation_animate_rectclip](https://github.com/flutter/website/tree/main/examples/_animation/radial_hero_animation_animate_rectclip)
+
+> **Pro tip:**  
+개발 중에 debugPaintSizeEnabled flag를 사용하도록 고려해라.  
+
+<br/>
+
+## What’s going on?  
+animation의 시작(t = 0.0)과 끝(t = 1.0)에서 잘린 이미지를 보여주는 다이어그램
+![](https://docs.flutter.dev/assets/images/docs/ui/animations/radial-hero-animation.png)  
+
+<br/>
+
+## Photo class
+
+```dart
+class Photo extends StatelessWidget {
+    Photo({ Key key, this.photo, this.color, this.onTap }) : super(key: key);
+
+    final String photo;
+    final Color color;
+    final VoidCallback onTap;
+
+    Widget build(BuildContext context) {
+        return Material(
+        // Slightly opaque color appears where the image has transparency.
+        color: Theme.of(context).primaryColor.withOpacity(0.25),
+        child: InkWell(
+            onTap: onTap,
+            child: Image.asset(
+                photo,
+                fit: BoxFit.contain,
+                )
+            ),
+        );
+    }
+}
+```  
+
+<br/>
+
+## RadialExpansion class  
+
+RadialExpansion 위젯은 변형하는 동안 이미지 클립의 위젯 트리를 build한다.
+
+![](https://docs.flutter.dev/assets/images/docs/ui/animations/radial-expansion-class.png)  
+
+Here’s the code:  
+```dart
+class RadialExpansion extends StatelessWidget {
+    RadialExpansion({
+        Key key,
+        this.maxRadius,
+        this.child,
+    }) : clipRectSize = 2.0 * (maxRadius / math.sqrt2),
+        super(key: key);
+
+    final double maxRadius;
+    final clipRectSize;
+    final Widget child;
+
+    @override
+    Widget build(BuildContext context) {
+        return ClipOval(
+            child: Center(
+                child: SizedBox(
+                    width: clipRectSize,
+                    height: clipRectSize,
+                    child: ClipRect(
+                        child: child,  // Photo
+                    ),
+                ),
+            ),
+        );
+    }
+}
+```  
+이 예제에서는 MaterialRectCenterArcTween 사용하는 tweening 삽입을 정의한다.
+
+Here’s the code:  
+```dart
+static RectTween _createRectTween(Rect begin, Rect end) {
+  return MaterialRectCenterArcTween(begin: begin, end: end);
+}
+```  
