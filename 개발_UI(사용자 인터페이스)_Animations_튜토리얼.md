@@ -63,4 +63,46 @@ vsync의 존재는 불필요한 resource를 방지한다.
 > **참고:** 경우에 따라 위치가 AnimationController의 0.0-1.0 범위에서 초과할 수 있다.  
 심지어 그렇지 않은 AnimationController 경우에도 CurvedAnimation는 0.0에서 1.0 범위를 초과할 수 있다.  
 
-## - Tween
+## - Tween  
+기본 AnimationController object의 범위: 0.0 ~ 1.0  
+만약 **다른 범위 또는 다른 데이터 타입이 필요**하다면, 다른 범위와 다른 데이터 타입에 삽입한 animation으로 구성된 Tween을 사용할 수 있다.  
+
+```dart
+tween = Tween<double>(begin: -200, end: 0); 
+// 0.0 ~ 1.0(input range) 범위에서 -200 ~ 0(output range) 으로 사용
+```  
+Tween은 시작과 끝의 범위가 상태변화가 없는 객체이다.  
+Tween의 상속: Animatable&#60;T>로 부터, Animatable&#60;T>이 아닌 것으로부터.  
+Animation과 같은 Animatable은 double을 output하지 않는다.  
+예를 들어, ColorTween(명확한 두 color 사이의 진행)  
+```dart
+colorTween = ColorTween(begin: Colors.transparent, end: Colors.black54);
+```  
+Tween object는 state를 저장하지 않는다.  
+대신에, Animation 현재 값의 매핑 기능을 지원하는 evaluate(Animation&#60;double> animation) 메서드를 제공한다.  
+
+### Tween.animate  
+Tween 객체를 사용하는 것은 controller 객체를 통과시킨 **Tween의 animate()** 를 부른다.  
+예를 들어, 기존 값에서 500 ms(milliseconds)를 넘는 0 to 255 범위 값 삽입 
+```dart
+AnimationController controller = AnimationController(duration: const Duration(milliseconds: 500), vsync: this);
+Animation<int> alpha = IntTween(begin: 0, end: 255).animate(controller);
+```  
+> **참고:** animate() 메서드는 Animatable이 아닌 것을 Animation으로 리턴한다.  
+
+예를 들어(controller, curve, Tween),  
+```dart
+AnimationController controller = AnimationController(
+    duration: const Duration(milliseconds: 500), vsync: this); // controller
+final Animation<double> curve = CurvedAnimation(parent: controller, curve: Curves.easeOut); // curve
+Animation<int> alpha = IntTween(begin: 0, end: 255).animate(curve); // Tween
+)
+```  
+
+## - Animation notifications(공지)  
+
+**Animation object:**  
+addListener()와 addStatusListener() 함께 정의된 Listener(s) and StatusListener(s)를 가진다.  
+**listener:** animation의 값이 변화할 때 부를 때, rebuild의 원인으로 setState()를 호출할 때.  
+**StatusListener:** AnimationStatus에 의해 정의됨으로써 animation begins, ends, moves forward, or moves reverse를 호출할 때.
+
