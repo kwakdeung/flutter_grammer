@@ -23,7 +23,44 @@ animation library안에 **필수적인 개념들, 클래스들, 메서드들**�
 
 animation 시스템은 **Animation** 객체들의 유형이 based 되어있다.  
 
-## - Animation<double>  
+## - Animation&#60;double>  
 Flutter Animation 객체는 스크린에서 무엇을 보여주는지 아무것도 모른다는 것을 알고 있다.   
 Animation은 현재 값과 (완료 또는 해체)상태를 이해하는 추상 클래스이다.  
-Animation<double>: 많이 공통적으로 사용된 animation type들 중 하나
+Animation&#60;double>: 많이 공통적으로 사용된 animation type들 중 하나  
+
+## - Curved­Animation
+
+**CurvedAnimation** 는 **non-linear curve**로서 animations 진행을 정의한다.  
+```dart
+animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
+```  
+>**참고:** Curves 클래스는 많은 일반적으로 사용된 curves 정의하거나 또는 사용자가 직접 생성한다.  
+```dart
+import 'dart:math';
+
+class ShakeCurve extends Curve {
+    @override
+    double transform(double t) => sin(t * pi * 2);
+}
+```  
+Curves 상수들의 완성한 list(visual 미리보기)를 위해 [**Curves**](https://api.flutter.dev/flutter/animation/Curves-class.html) 문서를 찾아봐라.  
+
+(다음 섹션에서 설명된) CurvedAnimation과 AnimationController는 둘 다 Animation&#60;double> 유형이다.  
+**CurvedAnimation**는 curve를 구현하기 위한 AnimationController의 하위클래스가 아닌 것을 수정하는 객체를 wrapping한다.  
+
+## - Animation­Controller  
+
+AnimationController은 하드웨어가 새로운 frame이 준비될 때 새로운 값이 생기는 특정한 Animation 객체이다.  
+기본적으로, Animation­Controller는 주어진 기간의 0.0 ~ 1.0 사이의 수를 linearly으로 생성한다.  
+```dart
+controller = AnimationController(duration: const Duration(seconde: 2), vsync: this); 
+// vsync: AnimationController 섹션 안의 vsync parameter 
+```  
+AnimationController는 Animation&#60;double>로부터 나온다. 그래서 Animation 객체가 필요하게 될 때 사용된다. 그러나 AnimationController는 animation을 컨트롤할 추가적인 메서드를 가진다.  
+AnimationController을 생성할 때, **vsync** argument(인수)를 통과한다.  
+vsync의 존재는 불필요한 resource를 방지한다.  
+
+> **참고:** 경우에 따라 위치가 AnimationController의 0.0-1.0 범위에서 초과할 수 있다.  
+심지어 그렇지 않은 AnimationController 경우에도 CurvedAnimation는 0.0에서 1.0 범위를 초과할 수 있다.  
+
+## - Tween
