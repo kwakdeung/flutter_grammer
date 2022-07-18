@@ -195,4 +195,64 @@ Focus scopes는 만약 아무도 descendants에서 focus를 가지지 않는다�
 ### FocusableActionDetector widget  
 FocusableActionDetector는  Actions, Shortcuts, MouseRegion 기능을 조합한 위젯이다. 그리고 detector를 생성하기 위한 Focus 위젯은 actions, key bindings을 정의한다. 그리고 handling focusdhk hover highlights를 위한 콜백을 제공한다.  
 
-### Controlling focus traversal
+### Controlling focus traversal  
+유저가 **Tab** 키를 눌러 "다음" 컨트롤로 이동하는 "tab traversal(탭 순회)"입니다. "다음"이 무엇을 의미하는지 제어하는 ​​것이 이 섹션의 주제이다.  
+focus 탐색을 위한 Flutter( )의 기본 알고리즘 ReadingOrderTraversalPolicy은 매우 훌륭하다.  
+
+### - FocusTraversalGroup widget  
+FocusTraversalGroup 위젯은 다른 위젯 또는 그룹 위젯을 움직이기 전에 full 탐색되어야 하는 위젯 subtree 주위 tree에 반드시 두어야 한다.  
+
+TWO, ONE, THREE를 사용하는 NumericFocusOrder를 사용하기 위해 button의 row를 탐색하기 위해 FocusTraversalOrder 위젯 사용 방법의 예이다.
+```dart
+class OrderedButtonRow extends StatelessWidget {
+    const OrderedButtonRow({super.key});
+
+    @override
+    Widget build(BuildContext context) {
+        return FocusTraversalGroup(
+            policy: OrederedTraversalPolicy(),
+            child: Row(
+                children: <Widget>[
+                    const Spacer(),
+                    FocusTraversalOrder(
+                        order: NumericFocusOrder(2.0),
+                        child: TextButton(
+                            child: const Text('ONE'),
+                            onPressed: () {},
+                        ),
+                    ),
+                    const Spacer(),
+                    FocusTraversalOrder(
+                        order: NumericFocusOrder(1.0),
+                        child: const Text('TWO'),
+                        onPressed: () {},
+                        ),
+                    ),
+                    const Spacer(),
+                    FocusTraversalOrder(
+                        order: NumericFocusOrder(3.0),
+                        child: TextButton(
+                            child: const Text('THREE'),
+                            onPressed: () {},
+                        ),
+                    ),
+                    const Spacer(),
+                ],
+            ),
+        );
+    }
+}
+```  
+### - FocusTraversalPolicy  
+FocusTraversalPolicy는 요청과 현재 focus node가 주어지면 다음 위젯을 결정하는 객체이다.  
+요청(멤버 함수): findFirstFocus, findLastFocus, next, previous, inDirection  
+FocusTraversalPolicy 정책 사용을 위한 추상적인 기본 클래스이다.(ReadingOrderTraversalPolicy, OrderedTraversalPolicy, the DirectionalFocusTraversalPolicyMixin classes)  
+FocusTraversalPolicy를 FocusTraversalGroup에서 사용하기 위해서는 효과적인 정책일 위젯 subtree를 결정하는 FocusTraversalGroup에서 하나를 주어야한다.  
+
+<br/>
+
+## The focus manager  
+FocusManager는 system을 위한 현재 primary focus를 유지한다. API의 focus system의 유저에게 유용한 몇몇의 pieces만 가진다.  
+FocusManager.instance.primaryFocus 속성 중 하나는 현재 focused된 focus node가 포함하고 global primaryFocus field로부터 허용한다.  
+다른 유용한 속성들은 FocusManager.instance.highlightMode와 FocusManager.instance.highlightStrategy이다. 그들은 focus highlights를 위한 touch 모드와 traditional 모드(마우스, 키보드) 사이에서 변화할 필요가 있는 위젯에 의해 사용되었다.  
+Flutter에서 제공된 위젯은 이 정보의 사용법을 이미 안다. 그리고 만약 scratch로부터 자신의 controls 작성한다면 오직 필요하다. 너는 highlight mode에서 변화를 위해 listen하기 위한 addHighlightModeListener 콜백을 사용할 수 있다.
