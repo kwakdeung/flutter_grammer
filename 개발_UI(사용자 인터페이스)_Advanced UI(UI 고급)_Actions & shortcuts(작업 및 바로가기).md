@@ -9,7 +9,7 @@ GUI application을 무엇이든 하기 위해 actions을 한다: 유저들은 �
 Intent 클래스 인스턴스: 유저 intent  
 Action은 간단한 콜백(예:CallbackAction)이거나 entire undo/redo architectures(전체 실행 취소/재실행 아키텍쳐)(예) 또는 다른 논리와 합쳐지는 더 복잡한 것일 수 있다.
 ![](https://docs.flutter.dev/assets/images/docs/using_shortcuts.png)  
-Shortcuts: 키 또는 결합 키들을 누름으로써 activate되는 키 바인딩들이다.  
+Shortcuts: 키 또는 결합 키들을 누름으로써 activate되는 key bindings이다.  
 
 <br/>
 
@@ -90,7 +90,7 @@ Shortcuts 위젯은 Intent 인스턴스를 찾기위해 맵에서 키 누름을 
 
 ## The ShortcutManager  
 shortcut manager는 그들에게 받을 때 key events에서 통과된 shortcuts 위젯보다 수명이 더 긴 객체이다.  
-키를 다루는 법 결정을 위한 logic 그리고 다른 shortcut 매핑을 찾는 tree를 걸어 올라가기 위한 logic, intents의 키 조합의 맵을 포함한다.  
+key를 다루는 법 결정을 위한 logic 그리고 다른 shortcut 매핑을 찾는 tree를 걸어 올라가기 위한 logic, intents의 키 조합의 맵을 포함한다.  
 
 
 ShortcutManager의 기본 동작이 대개 바람직하지만 Shortcuts 위젯은 ShortcutManager 기능을 사용자 정의하기 위해 하위 클래스로 만들 수 있는 것을 취한다.
@@ -196,7 +196,7 @@ Actions isEnabled(Intent intent) true로 리턴될 때 위젯 action에 오직 �
 ## Action dispatchers  
 
 대부분의 시간에는 action을 호출하고 해당 action을 수행하고 잊어버리기를 원한다. 그러나 때때로 실행된 action을 기록하고 싶을 수도 있다.  
-**ActionDispatcher**: 유저 정의 dispatcher로 바꾸는 곳.  
+**ActionDispatcher**: 유저 정의가 dispatcher로 바꾸는 곳.  
 ```dart
 class LoggingActionDispatcher extends ActionDispatcher {
     @override
