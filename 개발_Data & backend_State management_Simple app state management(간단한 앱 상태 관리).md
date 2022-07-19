@@ -1,1 +1,2 @@
-# Simple app state management(간단한 앱 상태 관리)
+# Simple app state management(간단한 앱 상태 관리)  
+[declarative UI programming](https://docs.flutter.dev/development/data-and-backend/state-mgmt/declarative)과 difference between [ephemeral and app state](https://docs.flutter.dev/development/data-and-backend/state-mgmt/ephemeral-vs-app)에 대해 알았으므로 simple app state management를 배울 준비가 되어있다.
