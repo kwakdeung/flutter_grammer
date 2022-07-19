@@ -8,7 +8,7 @@ class MyButton extends StatelessWidget {
     return GestureDetector(
       // GestureDetector: 입력 제스처를 감지하는 것
       onTap: () {
-        print('MyButton was tapped!');
+        debugPrint('MyButton was tapped!');
       },
       child: Container(
         height: 50.0,
