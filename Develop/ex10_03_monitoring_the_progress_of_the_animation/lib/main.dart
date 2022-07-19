@@ -44,7 +44,7 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
           controller.forward();
         }
       })
-      ..addStatusListener((status) => print('$status'));
+      ..addStatusListener((status) => debugPrint('$status'));
     controller.forward();
   }
 
