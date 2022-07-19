@@ -52,6 +52,8 @@ parent의 children으로 여러 위젯을 Scroll한다.
 [Text](https://docs.flutter.dev/development/ui/widgets/text)  
 text를 표시하고 style을 지정한다.
 
+
+테이블로 작성 추천해주심
 |ㅇㅇㅇ|ㅇㅇㅇ|ㅇㅇㅇ|
 |------|---|---|
 |ㅇㄹㅇ|ㄹㅇㄹ|ㅇㄹㅇㄹ|
