@@ -84,4 +84,21 @@ onPanEnd
 
 <br/>
 
-## Adding gesture detection to widgets
+## Adding gesture detection to widgets(위젯에 gesture 감시 추가)  
+위젯 layer로부터 gesture에 listen하는 것은 GestureDetector을 사용해라.  
+
+만약 Material Components를 사용한다면, 위젯들 중 많은 것은 tap 또는 gesture를 통해 이미 응답한다.  
+
+<br/>
+
+## Gesture disambiguation  
+screen에서 주어진 location에 multiple gesture detectors가 있을 수 있다.  
+GestureDetector 위젯은 non-null인 콜백의 기반으로 인식하는 것을 시도하는 gesture를 결정한다.  
+
+gesture arena(영역)는 rules를 사용함으로 gesture 승리를 결정한다:  
+* 언제든지 인식자는 패배를 선언 할 수 있고 arena을 떠날 수 있다.  
+* 언제든지 인식자는 승리를 선언할 수 있으므로, 승리하고 모든 remaining(남아있는) 인식자는 모두 지게 된다.  
+
+예를 들면, horizontal과 vertical dragging를 명확하게 할 때, 두 인식기는 pointer down event를 수신할 때 경기장에 들어간다. 인식기는 pointer down event를 관찰한다. 유저가 수평으로 특정 논리적 pixel 수 이상 pointer를 이동하면 horizontal 인식기가 승리를 선언하고 Gesture가 horizontal drag로 해석된다. 마찬가지로 유저가 vertical으로 특정 수의 논리적 pixel 이상을 이동하면 vertical 인식기가 승리를 선언한다.  
+
+gesture arena는 horizontal (또는 vertical) drag 인식자가 유일할 때 유익하다.
