@@ -225,8 +225,73 @@ return Consumer<CartModel>(
     },
 );
 ```
+우리는 허용을 원하는 model의 타입이 반드시 명확해야 한다. 이 경우는 CartModel을 원한다, 그래서 **Consumer<CartModel>**를 작성한다.  
 
-
+**Consumer** 위젯의 유일하게 필요한 argument는 builder이다. Builder는 **ChangeNotifier**이 변화하면서 언제든지 불려진 기능이다.  
+Builder는 3 개의 arguments(인수) 불려진다.  
+1. context - 모든 build 메서드에서 얻을 수 있다.
+2. ChangeNotifier의 instance - model의 data를 사용하여 주어진 지점에서 UI가 어떻게 보일지 정의할 수 있다.
+3. 최적화의 child - model이 변경될 때, 변경되지 않은 큰 위젯 subtree가 있는 경우 한 번 구성하고 builder를 통해 가져올 수 있다.
 ```dart
-
+return Consumer<CartModel>(
+    builder: (context, cart, child) => Stack(
+        children: [
+            // Use SomeExpensiveWidget here, without rebuilding every time.
+            if (child != null) child,
+            Text('Total price: ${cart.totalPrice}'),
+        ],
+    ),
+    // Build the expensive widget here.
+    child: const SomeExpensiveWidget(),
+);
 ```
+가능한 tree 안에서 깊숙히 Consumer 위젯에 두는 것을 최고의 실행이다. 너는 단순히 어딘가 변화된 detail 때문에 UI의 큰 일부를 rebuild하기를 원할 수 있다.  
+```dart
+// DON'T DO THIS
+return Consumer<CartModel>(
+    builder: (context, cart, child) {
+        return HumongousWidget(
+            // ...
+            child: AnotherMonstrousWidget(
+                // ...
+                child: Text('Total price: ${cart.totalPrice}'),
+            ),
+        );
+    },
+);
+```  
+대신에:
+```dart
+// DO THIS
+return HumongousWidget(
+    // ...
+    child: AnotherMonstrousWidget(
+        // ...
+        child: Consumer<CartModel>(
+            builder: (context, cart, child) {
+                return Text('Total price: ${cart.totalPrice}');
+            },
+        ),
+    ),
+);
+```  
+
+<br/>
+
+## Provider.of  
+때로는, UI가 변화하기 위한 model에 있는 data가 필요하지 않다. 그러나 여전히 그것을 허용하는 것 필요하다.  
+
+Consumer<CartModel>를 사용해야 하지만 낭비가 될 수 있다. rebuilt가 필요하지 않는 위젯을 rebuild 하기 위해 framework를 요청할 것이다.  
+
+이것을 사용하는 경우는, **false**에 set할 **listen** parameter와 함께 Provider.of를 사용할 수 있다.
+```dart
+Provider.of<CartModel>(context, listen: false).removeAll();
+```
+build 메서드에서 line 위에 사용하는 것은 notifyListeners가 불려질 때 rebuild를 위해 위젯을 야기시키질 않을 것이다.  
+
+<br/>
+
+## Putting it all together(함께 모아서 두다)  
+너는 기사에 covered된 [예제를 check out](https://github.com/flutter/samples/tree/main/provider_shopper) 할 수 있다. 만약 단순히 무언가를 원한다면, simple Counter 앱은 [built with provider](https://github.com/flutter/samples/tree/main/provider_counter)처럼 보이는 앱을 봐라.  
+
+이 기사들을 팔로잉함으로써, state-based applications를 생성하는 능력이 최고로 향상될 것이다. 이 스킬들을 마스터하기 위해 자체적으로 **provider**와 함께 application에 building을 시도해라.
