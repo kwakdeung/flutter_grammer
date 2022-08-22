@@ -1,7 +1,7 @@
 # Simple app state management(간단한 앱 상태 관리)  
 [declarative UI programming](https://docs.flutter.dev/development/data-and-backend/state-mgmt/declarative)과 difference between [ephemeral and app state](https://docs.flutter.dev/development/data-and-backend/state-mgmt/ephemeral-vs-app)에 대해 알았으므로 simple app state management를 배울 준비가 되어있다.  
 
-이 페이지에서는 **provider package**를 사용할 것이다.  
+이 페이지에서는 상태 관리 중에서 **provider package**를 사용할 것이다.  
 **provider package**는 이해하기 쉽고 많은 code를 사용하지 마라. 다른 모든 접근 방식에 적용할 수 있는 개념을 사용한다.  
 즉, 다른 reactive(반응형) framework의 state 관리에 대한 strong background이 있는 경우, [options page](https://docs.flutter.dev/development/data-and-backend/state-mgmt/options)에 나열된 package 및 튜토리얼을 찾을 수 있다.  
 
@@ -13,7 +13,7 @@ illustration(설명)을 위해 단순한 앱을 생각해라.
 앱은 2개의 분리된 screen을 가진다: catalog, cart(MyCatalog에 의해 나타남, Mycart 위젯)  
 catalog screen은 custom app bar(MyAppBar)와 많은 list item들의 scrolling view를 포함한다.  
 
-widget tree로 visualized(시각화된) 앱:
+widget tree로 visualized(시각화된) 앱:  
 ![](https://docs.flutter.dev/assets/images/docs/development/data-and-backend/state-mgmt/model-shopper-screencast.gif)  
 ![](https://docs.flutter.dev/assets/images/docs/development/data-and-backend/state-mgmt/simple-widget-tree.png)  
 
@@ -24,8 +24,8 @@ widget tree로 visualized(시각화된) 앱:
 
 <br/>
 
-## Lifting state up  
-Flutter에서는 state를 사용하는 위젯 위에 state를 유지하는 것이 합리적이다. 이유는 Flutter와 같은 선언적인 frameworks, 만약 UI가 변하길 원한다면, rebuild를 해야한다. MyCart.updateWith(somethingNew)를 쉽게 가질 수 없다. 위젯에 대한 메서드를 호출하여 외부에서 위젯을 명령적으로 변경하기가 어렵다.
+## Lifting state up(상태 끌어올리기)  
+Flutter에서는 **state를 사용하는 위젯 위**에 **state를 유지**하는 것이 합리적이다. 이유는 Flutter와 같은 선언적인 frameworks, 만약 UI가 변하길 원한다면, rebuild를 해야한다. MyCart.updateWith(somethingNew)를 쉽게 가질 수 없다. 위젯에 대한 메서드를 호출하여 외부에서 위젯을 명령적으로 변경하기가 어렵다.
 
 ```dart
 // BAD: DO NOT DO THIS
@@ -128,6 +128,7 @@ dev_dependencies:
 
 ## ChangeNotifier
 
+모든 위젯들이 listen 할 수 있는 ChangeNotifier 인스턴스를 생성한다.
 **ChangeNotifier**은 listeners에게 notification 변화를 provide한 Flutter SDK에 포함된 단순한 클래스이다.  
 다시 말해서, 만약 무언가가 ChangeNotifier인 경우, 변화를 구독할 수 있다.  
 
@@ -197,7 +198,7 @@ void main() {
 CartModel의 새로운 인스턴스를 생성하기를 builder를 정의하고 있다.  
 **ChangeNotifierProvider**는 absolutely necessary가 아니라면 CartModel을 rebuild 하지 않아도 충분히 스마트하다. 그것은 또한 인스턴스가 더 이상 필요가 없을 때 CartModel 위에 자동적으로 dispose()를 호출한다.  
 
-만약 한 개의 클래스보다 **더 많은 클래스**의 **provide**를 원한다면, **MultiProvider**를 사용할 수 있다.
+만약 한 개의 클래스(ChangeNotifierProvider)보다 **더 많은 클래스**의 **provide**를 원한다면, **MultiProvider**를 사용할 수 있다.
 ```dart
 void main() {
     runApp(
@@ -215,6 +216,7 @@ void main() {
 <br/>
 
 ## Consumer
+Provider의 데이터 값을 변경하거나 화면에 보여주는 것을 의미한다.  
 지금 CartModel은 top에서 선언한 ChangeNotifierProvider를 통해 우리의 앱에서 위젯에 provided 되고, 우리는 사용을 시작할 수 있다.
 
 Consumer 위젯을 통해 수행한다.
@@ -225,7 +227,7 @@ return Consumer<CartModel>(
     },
 );
 ```
-우리는 허용을 원하는 model의 타입이 반드시 명확해야 한다. 이 경우는 CartModel을 원한다, 그래서 **Consumer<CartModel>**를 작성한다.  
+우리는 허용을 원하는 model의 타입이 반드시 명확해야 한다. 이 경우는 CartModel을 원한다, 그래서 **Consumer&#60;CartModel>** 를 작성한다.  
 
 **Consumer** 위젯의 유일하게 필요한 argument는 builder이다. Builder는 **ChangeNotifier**이 변화하면서 언제든지 불려진 기능이다.  
 Builder는 3 개의 arguments(인수) 불려진다.  
