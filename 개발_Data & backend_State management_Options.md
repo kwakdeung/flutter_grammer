@@ -1,14 +1,14 @@
 # List of state management approaches(상태 관리 접근 방식 목록)  
 
-State management는 복잡한 주제이다.  
+상태 관리는 복잡한 주제이다.  
 
-많은 following links에 있는 것을 배워라. Flutter community에 기여되고 있다.  
+많은 팔로잉 링크에 있는 것을 배워라. Flutter 커뮤니티에 기여되고 있다.  
 
 <br/>
 
 ## General overview(일반 개요)  
 
-접근법을 선택하기 전에 review하는 것들  
+접근법을 선택하기 전에 리뷰하는 것들  
 
 * [Introduction to state management](https://docs.flutter.dev/development/data-and-backend/state-mgmt/intro)
 * [Pragmatic State Management in Flutter](https://www.youtube.com/watch?v=d_m5csmrf7I)
@@ -28,21 +28,21 @@ State management는 복잡한 주제이다.
 
 ## Riverpod(리버포드)  
 
-다른 좋은 선택인 Riverpod는 Provider하는 것과 유사하며, 컴파일을 안전하게 테스트를 하는 것이다. Riverpod은 Flutter SDK에서 dependency 하지 않는다.  
+다른 좋은 선택인 리버포드는 Provider하는 것과 유사하며, 컴파일을 안전하게 테스트를 하는 것이다. 리버포드은 Flutter SDK에서 dependency 하지 않는다.  
 * [Riverpod](https://riverpod.dev/) 홈페이지
 * [Getting started with Riverpod](https://riverpod.dev/docs/getting_started/)  
 
 <br/>
 
 ## setState  
-위젯별 ephemeral state에 사용할 낮은 레벨의 접근법  
+위젯별 임시 상태에 사용할 낮은 수준의 접근법  
 * [Adding interactivity to your Flutter app](https://docs.flutter.dev/development/ui/interactive), a Flutter tutorial
 * [Basic state management in Google Flutter](https://medium.com/@agungsurya/basic-state-management-in-google-flutter-6ee73608f96d), by Agung Surya
 
 <br/>
 
 ## InheritedWidget & InheritedModel  
-낮은 레벨의 접근법은 ancestors과 widget tree안에서의 children 사이에 communicate에 사용되곤 한다. **provider**이다. 그리고 많은 다른 접근법을 hood 아래에서 사용해라.  
+낮은 레벨의 접근법은 ancestors과 위젯 트리안에서의 children 사이에서 communicate에 사용되곤 한다. **provider**이다. 그리고 많은 다른 접근법을 후드 아래에서 사용해라.  
 
 InheritedWidget 사용법:
 
@@ -59,7 +59,7 @@ InheritedWidget 사용법:
 
 ## Redux
 
-state container 접근법은 많은 web developers와 유사.  
+상태 container 접근법은 많은 웹 개발과 유사.  
 * [Animation Management with Redux and Flutter](https://www.youtube.com/watch?v=9ZkLtr0Fbgk), a video from DartConf 2018 [Accompanying article on Medium](https://medium.com/flutter/animation-management-with-flutter-and-flux-redux-94729e6585fa)
 * [Flutter Redux package](https://pub.dev/packages/flutter_redux)
 * [Redux Saga Middleware Dart and Flutter](https://pub.dev/packages/redux_saga), by Bilal Uslu
@@ -77,7 +77,7 @@ state container 접근법은 많은 web developers와 유사.
 <br/>
 
 ## Fish-Redux  
-Fish Redux는 Redux state management 기초로 된 flutter application framework가 모여졌다.  medium과 large application의 building에 알맞는다.  
+피쉬 리덕스는 리덕스 상태 관리의 기초로 된 flutter 앱 프레임워크가 모여졌다.  medium과 large 앱의 building에 알맞는다.  
 * [Fish-Redux-Library](https://pub.dev/packages/fish_redux) package, by Alibaba
 * [Fish-Redux-Source](https://github.com/alibaba/fish-redux), project code
 * [Flutter-Movie](https://github.com/o1298098/Flutter-Movie), A non-trivial example demonstrating how to use Fish Redux, with more than 30 screens, graphql, payment api, and media player.
@@ -85,15 +85,15 @@ Fish Redux는 Redux state management 기초로 된 flutter application framework
 <br/>
 
 ## BLoC / Rx  
-stream/observable based patterns의 가족  
-* Architect your Flutter project using BLoC pattern, by Sagar Suri
-* BloC Library, by Felix Angelov
-* Reactive Programming - Streams - BLoC - Practical Use Cases, by Didier Boelens
+스트림/observable based patterns의 가족  
+* [Architect your Flutter project using BLoC pattern](https://medium.com/codechai/architecting-your-flutter-project-bd04e144a8f1), by Sagar Suri
+* [BloC Library](https://bloclibrary.dev/#/), by Felix Angelov
+* [Reactive Programming - Streams - BLoC - Practical Use Cases](https://www.didierboelens.com/2018/12/reactive-programming-streams-bloc-practical-use-cases/), by Didier Boelens
 
 <br/>
 
 ## GetIt
-state management 접근법 토대로 된 service locator는 **BuildContext**가 필요하지 않는다.  
+상태 관리 접근법 토대로 된 서비스 locator는 **BuildContext**가 필요하지 않는다.  
 * [GetIt package](https://pub.dev/packages/get_it), the service locator. It can also be used together with BloCs.
 * [GetIt Mixin package](https://pub.dev/packages/get_it_mixin), a mixin that completes GetIt to a full state management solution.
 * [GetIt Hooks package](https://pub.dev/packages/get_it_hooks), same as the mixin in case you already use flutter_hooks.
@@ -102,7 +102,7 @@ state management 접근법 토대로 된 service locator는 **BuildContext**가 
 <br/>
 
 ## MobX  
-observables와 reactions 토대로 된 인기있는 library  
+observables와 reactions 토대로 된 인기있는 라이브러리  
 * [MobX.dart, Hassle free state-management for your Dart and Flutter apps](https://github.com/mobxjs/mobx.dart)
 * [Getting started with MobX.dart](https://mobx.netlify.app/getting-started/)
 * [Flutter: State Management with Mobx](https://www.youtube.com/watch?v=p-MUBLOEkCs), a video by Paul Halliday
@@ -111,15 +111,15 @@ observables와 reactions 토대로 된 인기있는 library
 
 ## Flutter Commands  
 
-Reactive state management는 Command Pattern과 **ValueNotifiers**를 토대로 사용해라. [GetIt](https://docs.flutter.dev/development/data-and-backend/state-mgmt/options#getit)과 함께 사용하는 것이 가장 좋지만 **Provider** 또는 다른 locators와 함께 사용할 수도 있다.  
+Reactive 상태 관리는 커맨드 패턴과 **ValueNotifiers**를 토대로 사용해라. [GetIt](https://docs.flutter.dev/development/data-and-backend/state-mgmt/options#getit)과 함께 사용하는 것이 가장 좋지만 **Provider** 또는 다른 locators와 함께 사용할 수도 있다.  
 * [Flutter Command package](https://pub.dev/packages/flutter_command)
 * [RxCommand package](https://pub.dev/packages/rx_command), **Stream** based implementation.
 
 <br/>
 
 ## Binder  
-core에서 **InheritedWidget** 사용한 state management package.  
-이 package는 concerns(관심사)의 분리를 증진한다.  
+코어에서 **InheritedWidget** 사용한 상태 관리 패키지.  
+이 package는 관심사의 분리를 증진한다.  
 * [Binder package](https://pub.dev/packages/binder)
 * [Binder examples](https://github.com/letsar/binder/tree/main/examples)
 * [Binder snippets](https://marketplace.visualstudio.com/items?itemName=romain-rastel.flutter-binder-snippets), vscode snippets to be even more productive with Binder
@@ -127,7 +127,7 @@ core에서 **InheritedWidget** 사용한 state management package.
 <br/>
 
 ## GetX  
-단순화된 reactive state management 해결책.
+단순화된 reactive 상태 관리 해결책.
 * [GetX package](https://pub.dev/packages/get)
 * [Complete GetX State Management](https://www.youtube.com/watch?v=CNpXbeI_slw), a video by Tadas Petra
 * [GetX Flutter Firebase Auth Example](https://jeffmcmorris.medium.com/getx-flutter-firebase-auth-example-b383c1dd1de2), by Jeff McMorris
@@ -135,15 +135,15 @@ core에서 **InheritedWidget** 사용한 state management package.
 <br/>
 
 ## states_rebuilder  
-dependency injection(주입) 해결책과 integrated(통합) router와 함께 state management를 결합한 접근법  
+dependency 주입 해결책과 통합 router와 함께 상태 관리를 결합한 접근법  
 * [States Rebuilder](https://github.com/GIfatahTH/states_rebuilder) project code
 * [States Rebuilder documentation](https://github.com/GIfatahTH/states_rebuilder/wiki)
 
 <br/>
 
 ## Triple Pattern (Segmented State Pattern)  
-Triple은 Streams 또는 ValueNotifier을 사용한 state management을 위한 패턴이다.  
-mechanism stream은 Segmented State pattern 토대로 3개의 값을 항상 사용해라  
+Triple은 스트림 또는 ValueNotifier을 사용한 상태 관리를 위한 패턴이다.  
+mechanism 스트림은 분리 상태 패턴을 토대로 3개의 값을 항상 사용해라  
 : Error, Loading, State  
 * [Triple documentation](https://triple.flutterando.com.br/)
 * [Flutter Triple package](https://pub.dev/packages/flutter_triple)
