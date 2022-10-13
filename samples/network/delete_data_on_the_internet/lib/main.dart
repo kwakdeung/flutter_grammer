@@ -80,12 +80,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Delete Data Example',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Delete Data Example'),
+          centerTitle: true,
         ),
         body: Center(
           child: FutureBuilder<Album>(

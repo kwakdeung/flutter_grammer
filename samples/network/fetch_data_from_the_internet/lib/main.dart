@@ -66,12 +66,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Fetch Data Example',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Fetch Data Example'),
+          centerTitle: true,
         ),
         body: Center(
           child: FutureBuilder<Album>(

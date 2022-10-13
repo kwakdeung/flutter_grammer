@@ -60,6 +60,7 @@ class MyApp extends StatelessWidget {
     const appTitle = 'Isolate Demo';
 
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: appTitle,
       home: MyHomePage(title: appTitle),
     );
@@ -76,6 +77,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+        centerTitle: true,
       ),
       body: FutureBuilder<List<Photo>>(
         future: fetchPhotos(http.Client()),

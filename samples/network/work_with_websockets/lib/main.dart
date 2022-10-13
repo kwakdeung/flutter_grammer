@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     const title = 'WebSocket Demo';
     return const MaterialApp(
       title: title,
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(
         title: title,
       ),
@@ -43,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

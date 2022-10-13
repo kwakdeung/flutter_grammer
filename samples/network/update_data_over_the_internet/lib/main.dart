@@ -86,12 +86,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Update Data Example',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Update Data Example'),
+          centerTitle: true,
         ),
         body: Container(
           alignment: Alignment.center,
